@@ -24,7 +24,7 @@ import com.aaa.repast.admin.project.system.product.service.IProductService;
  * 商品 信息操作处理
  * 
  * @author Seven Lee
- * @date 2019-12-27
+ * @date 2019-12-28
  */
 @Controller
 @RequestMapping("/system/product")

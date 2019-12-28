@@ -5,13 +5,12 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.aaa.repast.admin.framework.web.domain.BaseEntity;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * 商品表 pms_product
  * 
  * @author Seven Lee
- * @date 2019-12-27
+ * @date 2019-12-28
  */
 public class Product extends BaseEntity
 {
@@ -27,9 +26,9 @@ public class Product extends BaseEntity
 	private Long productCategoryId;
 	/** 产品属性类别ID */
 	private Long productAttributeCategoryId;
-	/**  */
+	/** 名字 */
 	private String name;
-	/**  */
+	/** 图片路径 */
 	private String pic;
 	/** 货号 */
 	private String productSn;
@@ -45,7 +44,7 @@ public class Product extends BaseEntity
 	private Integer sort;
 	/** 销量 */
 	private Integer sale;
-	/**  */
+	/** 价格 */
 	private BigDecimal price;
 	/** 促销价格 */
 	private BigDecimal promotionPrice;
@@ -67,24 +66,24 @@ public class Product extends BaseEntity
 	private BigDecimal weight;
 	/** 以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮 */
 	private String serviceIds;
-	/**  */
+	/** 关键字 */
 	private String keywords;
-	/**  */
+	/** 注意事项 */
 	private String note;
 	/** 画册id */
 	private Long albumId;
-	/**  */
+	/** 详细标题 */
 	private String detailTitle;
-	/**  */
+	/** 细节 */
 	private String detailDesc;
 	/** 产品详情网页内容 */
 	private String detailHtml;
 	/** 移动端网页详情 */
 	private String detailMobileHtml;
 	/** 促销开始时间 */
-	private Date promotionStartTime;
+	private String promotionStartTime;
 	/** 促销结束时间 */
-	private Date promotionEndTime;
+	private String promotionEndTime;
 	/** 活动限购数量 */
 	private Integer promotionPerLimit;
 	/** 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购 */
@@ -95,6 +94,8 @@ public class Product extends BaseEntity
 	private String productCategoryName;
 	/** 币种，0-> 人民币;  1-> 积分 */
 	private Integer currency;
+	/** 霸王餐0-->参加,1-->不参加 */
+	private Integer free;
 
 	public void setId(Long id) 
 	{
@@ -384,21 +385,21 @@ public class Product extends BaseEntity
 	{
 		return detailMobileHtml;
 	}
-	public void setPromotionStartTime(Date promotionStartTime) 
+	public void setPromotionStartTime(String promotionStartTime) 
 	{
 		this.promotionStartTime = promotionStartTime;
 	}
 
-	public Date getPromotionStartTime() 
+	public String getPromotionStartTime() 
 	{
 		return promotionStartTime;
 	}
-	public void setPromotionEndTime(Date promotionEndTime) 
+	public void setPromotionEndTime(String promotionEndTime) 
 	{
 		this.promotionEndTime = promotionEndTime;
 	}
 
-	public Date getPromotionEndTime() 
+	public String getPromotionEndTime() 
 	{
 		return promotionEndTime;
 	}
@@ -447,6 +448,15 @@ public class Product extends BaseEntity
 	{
 		return currency;
 	}
+	public void setFree(Integer free) 
+	{
+		this.free = free;
+	}
+
+	public Integer getFree() 
+	{
+		return free;
+	}
 
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -489,6 +499,7 @@ public class Product extends BaseEntity
             .append("brandName", getBrandName())
             .append("productCategoryName", getProductCategoryName())
             .append("currency", getCurrency())
+            .append("free", getFree())
             .toString();
     }
 }

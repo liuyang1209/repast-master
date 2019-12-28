@@ -7,7 +7,7 @@ import java.util.List;
  * 商品 数据层
  * 
  * @author Seven Lee
- * @date 2019-12-27
+ * @date 2019-12-28
  */
 public interface ProductMapper 
 {

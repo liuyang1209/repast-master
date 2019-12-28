@@ -44,10 +44,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="brandName"    column="brand_name"    />
         <result property="productCategoryName"    column="product_category_name"    />
         <result property="currency"    column="currency"    />
+        <result property="free"    column="free"    />
     </resultMap>
 	
 	<sql id="selectProductVo">
-        select id, shop_id, brand_id, product_category_id, product_attribute_category_id, name, pic, product_sn, delete_status, publish_status, new_status, recommand_status, sort, sale, price, promotion_price, gift_point, sub_title, description, original_price, stock, low_stock, unit, weight, service_ids, keywords, note, album_id, detail_title, detail_desc, detail_html, detail_mobile_html, promotion_start_time, promotion_end_time, promotion_per_limit, promotion_type, brand_name, product_category_name, currency from pms_product
+        select id, shop_id, brand_id, product_category_id, product_attribute_category_id, name, pic, product_sn, delete_status, publish_status, new_status, recommand_status, sort, sale, price, promotion_price, gift_point, sub_title, description, original_price, stock, low_stock, unit, weight, service_ids, keywords, note, album_id, detail_title, detail_desc, detail_html, detail_mobile_html, promotion_start_time, promotion_end_time, promotion_per_limit, promotion_type, brand_name, product_category_name, currency, free from pms_product
     </sql>
 	
     <select id="selectProductList" parameterType="Product" resultMap="ProductResult">
@@ -85,13 +86,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="detailDesc != null  and detailDesc != '' "> and detail_desc = #{detailDesc}</if>
              <if test="detailHtml != null  and detailHtml != '' "> and detail_html = #{detailHtml}</if>
              <if test="detailMobileHtml != null  and detailMobileHtml != '' "> and detail_mobile_html = #{detailMobileHtml}</if>
-             <if test="promotionStartTime != null "> and promotion_start_time = #{promotionStartTime}</if>
-             <if test="promotionEndTime != null "> and promotion_end_time = #{promotionEndTime}</if>
+             <if test="promotionStartTime != null  and promotionStartTime != '' "> and promotion_start_time = #{promotionStartTime}</if>
+             <if test="promotionEndTime != null  and promotionEndTime != '' "> and promotion_end_time = #{promotionEndTime}</if>
              <if test="promotionPerLimit != null "> and promotion_per_limit = #{promotionPerLimit}</if>
              <if test="promotionType != null "> and promotion_type = #{promotionType}</if>
              <if test="brandName != null  and brandName != '' "> and brand_name = #{brandName}</if>
              <if test="productCategoryName != null  and productCategoryName != '' "> and product_category_name = #{productCategoryName}</if>
              <if test="currency != null "> and currency = #{currency}</if>
+             <if test="free != null "> and free = #{free}</if>
          </where>
     </select>
     
@@ -135,13 +137,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="detailDesc != null  and detailDesc != ''  ">detail_desc,</if>
 			<if test="detailHtml != null  and detailHtml != ''  ">detail_html,</if>
 			<if test="detailMobileHtml != null  and detailMobileHtml != ''  ">detail_mobile_html,</if>
-			<if test="promotionStartTime != null  ">promotion_start_time,</if>
-			<if test="promotionEndTime != null  ">promotion_end_time,</if>
+			<if test="promotionStartTime != null  and promotionStartTime != ''  ">promotion_start_time,</if>
+			<if test="promotionEndTime != null  and promotionEndTime != ''  ">promotion_end_time,</if>
 			<if test="promotionPerLimit != null  ">promotion_per_limit,</if>
 			<if test="promotionType != null  ">promotion_type,</if>
 			<if test="brandName != null  and brandName != ''  ">brand_name,</if>
 			<if test="productCategoryName != null  and productCategoryName != ''  ">product_category_name,</if>
 			<if test="currency != null  ">currency,</if>
+			<if test="free != null  ">free,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="id != null  ">#{id},</if>
@@ -176,13 +179,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="detailDesc != null  and detailDesc != ''  ">#{detailDesc},</if>
 			<if test="detailHtml != null  and detailHtml != ''  ">#{detailHtml},</if>
 			<if test="detailMobileHtml != null  and detailMobileHtml != ''  ">#{detailMobileHtml},</if>
-			<if test="promotionStartTime != null  ">#{promotionStartTime},</if>
-			<if test="promotionEndTime != null  ">#{promotionEndTime},</if>
+			<if test="promotionStartTime != null  and promotionStartTime != ''  ">#{promotionStartTime},</if>
+			<if test="promotionEndTime != null  and promotionEndTime != ''  ">#{promotionEndTime},</if>
 			<if test="promotionPerLimit != null  ">#{promotionPerLimit},</if>
 			<if test="promotionType != null  ">#{promotionType},</if>
 			<if test="brandName != null  and brandName != ''  ">#{brandName},</if>
 			<if test="productCategoryName != null  and productCategoryName != ''  ">#{productCategoryName},</if>
 			<if test="currency != null  ">#{currency},</if>
+			<if test="free != null  ">#{free},</if>
          </trim>
     </insert>
 	 
@@ -220,13 +224,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="detailDesc != null  and detailDesc != ''  ">detail_desc = #{detailDesc},</if>
             <if test="detailHtml != null  and detailHtml != ''  ">detail_html = #{detailHtml},</if>
             <if test="detailMobileHtml != null  and detailMobileHtml != ''  ">detail_mobile_html = #{detailMobileHtml},</if>
-            <if test="promotionStartTime != null  ">promotion_start_time = #{promotionStartTime},</if>
-            <if test="promotionEndTime != null  ">promotion_end_time = #{promotionEndTime},</if>
+            <if test="promotionStartTime != null  and promotionStartTime != ''  ">promotion_start_time = #{promotionStartTime},</if>
+            <if test="promotionEndTime != null  and promotionEndTime != ''  ">promotion_end_time = #{promotionEndTime},</if>
             <if test="promotionPerLimit != null  ">promotion_per_limit = #{promotionPerLimit},</if>
             <if test="promotionType != null  ">promotion_type = #{promotionType},</if>
             <if test="brandName != null  and brandName != ''  ">brand_name = #{brandName},</if>
             <if test="productCategoryName != null  and productCategoryName != ''  ">product_category_name = #{productCategoryName},</if>
             <if test="currency != null  ">currency = #{currency},</if>
+            <if test="free != null  ">free = #{free},</if>
         </trim>
         where id = #{id}
     </update>
