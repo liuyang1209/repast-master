@@ -222,7 +222,22 @@
                 </exclusion>
             </exclusions>
         </dependency>
-    </dependencies>
 
+        <!-- joda time begin -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
+        <!-- joda time end -->
+
+
+        <!-- ftp begin -->
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>3.5</version>
+        </dependency>
+        <!-- ftp end -->
+    </dependencies>
 
 </project>
