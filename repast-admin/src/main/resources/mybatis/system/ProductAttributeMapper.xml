@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.repast.admin.project.system.productAttribute.mapper.ProductAttributeMapper">
+    
+    <resultMap type="ProductAttribute" id="ProductAttributeResult">
+        <result property="id"    column="id"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="productAttributeCategoryId"    column="product_attribute_category_id"    />
+        <result property="name"    column="name"    />
+        <result property="selectType"    column="select_type"    />
+        <result property="inputType"    column="input_type"    />
+        <result property="inputList"    column="input_list"    />
+        <result property="sort"    column="sort"    />
+        <result property="filterType"    column="filter_type"    />
+        <result property="searchType"    column="search_type"    />
+        <result property="relatedStatus"    column="related_status"    />
+        <result property="handAddStatus"    column="hand_add_status"    />
+        <result property="type"    column="type"    />
+    </resultMap>
+	
+	<sql id="selectProductAttributeVo">
+        select id, shop_id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type from pms_product_attribute
+    </sql>
+	
+    <select id="selectProductAttributeList" parameterType="ProductAttribute" resultMap="ProductAttributeResult">
+        <include refid="selectProductAttributeVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="productAttributeCategoryId != null "> and product_attribute_category_id = #{productAttributeCategoryId}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="selectType != null "> and select_type = #{selectType}</if>
+             <if test="inputType != null "> and input_type = #{inputType}</if>
+             <if test="inputList != null  and inputList != '' "> and input_list = #{inputList}</if>
+             <if test="sort != null "> and sort = #{sort}</if>
+             <if test="filterType != null "> and filter_type = #{filterType}</if>
+             <if test="searchType != null "> and search_type = #{searchType}</if>
+             <if test="relatedStatus != null "> and related_status = #{relatedStatus}</if>
+             <if test="handAddStatus != null "> and hand_add_status = #{handAddStatus}</if>
+             <if test="type != null "> and type = #{type}</if>
+         </where>
+    </select>
+    
+    <select id="selectProductAttributeById" parameterType="Long" resultMap="ProductAttributeResult">
+        <include refid="selectProductAttributeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertProductAttribute" parameterType="ProductAttribute">
+        insert into pms_product_attribute
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="productAttributeCategoryId != null  ">product_attribute_category_id,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="selectType != null  ">select_type,</if>
+			<if test="inputType != null  ">input_type,</if>
+			<if test="inputList != null  and inputList != ''  ">input_list,</if>
+			<if test="sort != null  ">sort,</if>
+			<if test="filterType != null  ">filter_type,</if>
+			<if test="searchType != null  ">search_type,</if>
+			<if test="relatedStatus != null  ">related_status,</if>
+			<if test="handAddStatus != null  ">hand_add_status,</if>
+			<if test="type != null  ">type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="productAttributeCategoryId != null  ">#{productAttributeCategoryId},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="selectType != null  ">#{selectType},</if>
+			<if test="inputType != null  ">#{inputType},</if>
+			<if test="inputList != null  and inputList != ''  ">#{inputList},</if>
+			<if test="sort != null  ">#{sort},</if>
+			<if test="filterType != null  ">#{filterType},</if>
+			<if test="searchType != null  ">#{searchType},</if>
+			<if test="relatedStatus != null  ">#{relatedStatus},</if>
+			<if test="handAddStatus != null  ">#{handAddStatus},</if>
+			<if test="type != null  ">#{type},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateProductAttribute" parameterType="ProductAttribute">
+        update pms_product_attribute
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="productAttributeCategoryId != null  ">product_attribute_category_id = #{productAttributeCategoryId},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="selectType != null  ">select_type = #{selectType},</if>
+            <if test="inputType != null  ">input_type = #{inputType},</if>
+            <if test="inputList != null  and inputList != ''  ">input_list = #{inputList},</if>
+            <if test="sort != null  ">sort = #{sort},</if>
+            <if test="filterType != null  ">filter_type = #{filterType},</if>
+            <if test="searchType != null  ">search_type = #{searchType},</if>
+            <if test="relatedStatus != null  ">related_status = #{relatedStatus},</if>
+            <if test="handAddStatus != null  ">hand_add_status = #{handAddStatus},</if>
+            <if test="type != null  ">type = #{type},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteProductAttributeById" parameterType="Long">
+        delete from pms_product_attribute where id = #{id}
+    </delete>
+	
+    <delete id="deleteProductAttributeByIds" parameterType="String">
+        delete from pms_product_attribute where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectCategoryName" parameterType="Long" resultType="com.aaa.repast.admin.project.system.productAttribute.vo.ProductAttributeVo">
+        select name from pms_product_attribute_category
+    </select>
+
+    
+</mapper>

@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-productAttribute-add">
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="col-sm-3 control-label">店铺id：</label>
+					<div class="col-sm-9">
+						<input type="text" name="shopId" class="form-control" placeholder="请输入店铺id">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">产品属性分类id：</label>
+					<div class="col-sm-9">
+						<select class="form-control" name="productAttributeCategoryId"></select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">属性名称：</label>
+					<div class="col-sm-9">
+						<input type="text" name="name" class="form-control" placeholder="请输入文本">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">排序字段：</label>
+					<div class="col-sm-9">
+						<input type="text" name="sort" class="form-control" placeholder="请输入排序字段">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">可选值列表：</label>
+					<div class="col-sm-9">
+						<input type="text" name="inputList" class="form-control" placeholder="请输入可选值，以逗号隔开">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">属性选择类型：</label>
+					<div class="col-sm-9">
+						<label class="radio-box">
+							<div>
+								<input type="radio" checked="" value="0" id="optionsRadios1" name="selectType" style="position: absolute; opacity: 0;">
+							</div>唯一</label>
+						<label class="radio-box">
+							<div>
+								<input type="radio" value="1" id="optionsRadios2" name="selectType" style="position: absolute; opacity: 0;">
+							</div>单选</label>
+						<label class="radio-box">
+							<div>
+								<input type="radio" value="2" id="optionsRadios3" name="selectType" style="position: absolute; opacity: 0;">
+							</div>多选</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">属性录入方式：</label>
+					<div class="col-sm-9">
+						<label class="radio-box" for="inputType1">
+							<div>
+								<input type="radio" checked="checked" value="0" id="inputType1" name="inputType" style="position: absolute; opacity: 0;">
+							</div>手工录入</label>
+						<label class="radio-box" for="inputType2">
+							<div>
+								<input type="radio" value="1" id="inputType2" name="inputType" style="position: absolute; opacity: 0;">
+							</div>从列表中选取</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">分类筛选样式：</label>
+					<div class="col-sm-9">
+						<label class="radio-box" for="filterType1">
+							<div>
+								<input type="radio" checked="checked" value="0" id="filterType1" name="filterType" style="position: absolute; opacity: 0;">
+							</div>普通</label>
+						<label class="radio-box" for="filterType2">
+							<div>
+								<input type="radio" value="1" id="filterType2" name="filterType" style="position: absolute; opacity: 0;">
+							</div>颜色</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">检索类型：</label>
+					<div class="col-sm-9">
+						<label class="radio-box" for="searchType1">
+							<div>
+								<input type="radio" checked="checked" value="0" id="searchType1" name="searchType" style="position: absolute; opacity: 0;">
+							</div>不需要进行检索</label>
+						<label class="radio-box" for="searchType2">
+							<div>
+								<input type="radio" value="1" id="searchType2" name="searchType" style="position: absolute; opacity: 0;">
+							</div>关键字检索</label>
+						<label class="radio-box" for="searchType3">
+							<div>
+								<input type="radio" value="2" id="searchType3" name="searchType" style="position: absolute; opacity: 0;">
+							</div>范围检索</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">相同属性产品是否关联：</label>
+					<div class="col-sm-9">
+						<label class="radio-box" for="relatedStatus1">
+							<div>
+								<input type="radio" checked="checked" value="0" id="relatedStatus1" name="relatedStatus" style="position: absolute; opacity: 0;">
+							</div>不关联</label>
+						<label class="radio-box" for="relatedStatus2">
+							<div>
+								<input type="radio" value="1" id="relatedStatus2" name="relatedStatus" style="position: absolute; opacity: 0;">
+							</div>关联</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">是否支持手动新增：</label>
+					<div class="col-sm-9">
+						<label class="radio-box" for="handAddStatus1">
+							<div>
+								<input type="radio" checked="checked" value="0" id="handAddStatus1" name="handAddStatus" style="position: absolute; opacity: 0;">
+							</div>不支持</label>
+						<label class="radio-box" for="handAddStatus2">
+							<div>
+								<input type="radio" value="1" id="handAddStatus2" name="handAddStatus" style="position: absolute; opacity: 0;">
+							</div>支持</label>
+					</div>
+				</div>
+				<div class="form-group">
+				<label class="col-sm-3 control-label">属性的类型：</label>
+				<div class="col-sm-9">
+					<label class="radio-box" for="type1">
+						<div>
+							<input type="radio" checked="checked" value="0" id="type1" name="type" style="position: absolute; opacity: 0;">
+						</div>规格</label>
+					<label class="radio-box" for="type2">
+						<div>
+							<input type="radio" value="1" id="type2" name="type" style="position: absolute; opacity: 0;">
+						</div>参数</label>
+				</div>
+			</div>
+			</div>
+		</form>
+	</div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "system/productAttribute"
+		$("#form-productAttribute-add").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/add", $('#form-productAttribute-add').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>
