@@ -3,62 +3,21 @@
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
-    
+
      <div class="container-div">
 		<div class="row">
 			<div class="col-sm-12 search-collapse">
-				<form id="formId">
-					<div class="select-list">
-						<ul>
-							<li>
-								：<input type="text" name="shopId"/>
-							</li>
 
-							<li>
-								上机分类的编号：0表示一级分类：<input type="text" name="parentId"/>
-							</li>
-
-							<li>
-								：<input type="text" name="name"/>
-							</li>
-
-							<li>
-								分类级别：0->1级；1->2级：<input type="text" name="level"/>
-							</li>
-
-							<li>
-								显示状态：0->不显示；1->显示：<input type="text" name="showStatus"/>
-							</li>
-
-							<li>
-								：<input type="text" name="sort"/>
-							</li>
-
-							<li>
-								图标：<input type="text" name="icon"/>
-							</li>
-
-							<li>
-								：<input type="text" name="keywords"/>
-							</li>
-
-							<li>
-								描述：<input type="text" name="description"/>
-							</li>
-
-							<li>
-								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
-							</li>
-						</ul>
-					</div>
-				</form>
 			</div>
-			
+
 	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
-				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:productCategory:add">
+				<!--<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:productCategory:add">
 					<i class="fa fa-plus"></i> 添加
-				</a>
+				</a>-->
+				<!--<a class="btn btn-success" data-toggle="modal" data-target="#myModal" shiro:hasPermission="system:productCategory:add">-->
+					<a class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick="clearForm()" shiro:hasPermission="system:productCategory:add">
+						<i class="fa fa-plus"></i> 添加
+					</a>
 				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="system:productCategory:edit">
 					<i class="fa fa-edit"></i> 修改
 				</a>
@@ -74,88 +33,440 @@
 			</div>
 		</div>
 	</div>
+	 <!--添加的模态框-->
+	 <!-- Modal -->
+	 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		 <div class="modal-dialog" role="document">
+			 <div class="modal-content">
+				 <div class="modal-header">
+					 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					 <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				 </div>
+				 <div class="modal-body">
+					 <!--表单开始-->
+					 <form class="form-horizontal m" id="form-productCategory-add">
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">id：</label>
+							 <div class="col-sm-8">
+								 <input id="id" name="id" class="form-control" type="text">
+							 </div>
+						 </div>
+
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">名字：</label>
+							 <div class="col-sm-8">
+								 <input id="name" name="name" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">分类级别：</label>
+							 <div class="col-sm-8" >
+								 <select class="form-control" name="" >
+									 <option>一级类别</option>
+								 </select>
+
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">图标：</label>
+							 <div class="col-sm-8">
+								 <input class="form-control" type="file" name="file" id="file">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">关键字：</label>
+							 <div class="col-sm-8">
+								 <input id="keywords" name="keywords" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">描述：</label>
+							 <div class="col-sm-8">
+								 <input id="description" name="description" class="form-control" type="text">
+							 </div>
+						 </div>
+					 </form>
+					 <!--表单结束-->
+				 </div>
+				 <div class="modal-footer">
+					 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					 <button type="button" class="btn btn-primary" id="do_upload">确定</button>
+				 </div>
+			 </div>
+		 </div>
+	 </div>
+	 <!-- Modal 结束-->
+	 <!--查看二级类目的模态框-->
+	 <div class="modal fade" id="towModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		 <div class="modal-dialog" role="document">
+			 <div class="modal-content">
+				 <div class="modal-header">
+					 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					 <h4 class="modal-title" id="twoModalLabel">Modal title</h4>
+				 </div>
+				 <div class="modal-body">
+					 <!--表单开始-->
+					 <table class="table table-striped" id="towTable">
+						 <thead>
+						 <tr>
+							 <th>编号</th>
+							 <th>类别名称</th>
+							 <th>等级</th>
+							 <th>图片</th>
+							 <th>关键字</th>
+							 <th>描述</th>
+							 <th>操作</th>
+						 </tr>
+						 </thead>
+						 <tbody>
+
+						 </tbody>
+					 </table>
+					 <!--表单结束-->
+				 </div>
+				 <div class="modal-footer">
+					 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			<!--		 <button type="button" class="btn btn-primary" >确定</button>-->
+				 </div>
+			 </div>
+		 </div>
+	 </div>
+	 <!--修改二级类目的模态框-->
+	 <div class="modal fade" id="towInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		 <div class="modal-dialog" role="document">
+			 <div class="modal-content">
+				 <div class="modal-header">
+					 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					 <h4 class="modal-title" id="twoModalLabelInfo">Modal title</h4>
+				 </div>
+				 <div class="modal-body">
+					 <!--表单开始-->
+					 <form class="form-horizontal m" id="twoForms">
+
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">id：</label>
+							 <div class="col-sm-8">
+								 <input  name="id" id="ids" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">名字：</label>
+							 <div class="col-sm-8">
+								 <input  name="name" id="names" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">图标：</label>
+							 <div class="col-sm-8">
+								 <input class="form-control" type="file" name="file">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">关键字：</label>
+							 <div class="col-sm-8">
+								 <input  name="keywords" id="keywordss" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">描述：</label>
+							 <div class="col-sm-8">
+								 <input name="description" id="descriptions" class="form-control" type="text">
+							 </div>
+						 </div>
+					 </form>
+					 <!--表单结束-->
+				 </div>
+				 <div class="modal-footer">
+					 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					 <button type="button" class="btn btn-primary" id="addTwo">确定</button>
+				 </div>
+			 </div>
+		 </div>
+	 </div>
+		<!--添加二级类目信息的模特框-->
+	 <div class="modal fade" id="towInfos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		 <div class="modal-dialog" role="document">
+			 <div class="modal-content">
+				 <div class="modal-header">
+					 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					 <h4 class="modal-title" id="twoModalLabelInfos">Modal title</h4>
+				 </div>
+				 <div class="modal-body">
+
+					 <!--表单开始-->
+					 <form class="form-horizontal m" id="twoInfoForms">
+						 <input name="parentId" id="parentId" style="display: none">
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">名字：</label>
+							 <div class="col-sm-8">
+								 <input  name="name" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">图标：</label>
+							 <div class="col-sm-8">
+								 <input class="form-control" type="file" name="file">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">关键字：</label>
+							 <div class="col-sm-8">
+								 <input  name="keywords"  class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">描述：</label>
+							 <div class="col-sm-8">
+								 <input name="description"  class="form-control" type="text">
+							 </div>
+						 </div>
+					 </form>
+					 <!--表单结束-->
+				 </div>
+				 <div class="modal-footer">
+					 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					 <button type="button" class="btn btn-primary" id="towProInfo">确定</button>
+				 </div>
+			 </div>
+		 </div>
+	 </div>
+
+
+
+	 <!--结束-->
     <div th:include="include :: footer"></div>
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('system:productCategory:edit')}]];
         var removeFlag = [[${@permission.hasPermi('system:productCategory:remove')}]];
         var prefix = ctx + "system/productCategory";
 
-        $(function() {
-            var options = {
-                url: prefix + "/list",
-                createUrl: prefix + "/add",
-                updateUrl: prefix + "/edit/{id}",
-                removeUrl: prefix + "/remove",
-				exportUrl: prefix + "/export",
-                modalName: "产品分类",
-				search: false,
-		        showExport: true,
-                columns: [{
-		            checkbox: true
-		        },
-				{
-					field : 'id', 
-					title : '',
-					visible: false
-				},
-				{
-					field : 'shopId', 
-					title : '',
-					sortable: true
-				},
-				{
-					field : 'parentId', 
-					title : '上机分类的编号：0表示一级分类',
-					sortable: true
-				},
-				{
-					field : 'name', 
-					title : '',
-					sortable: true
-				},
-				{
-					field : 'level', 
-					title : '分类级别：0->1级；1->2级',
-					sortable: true
-				},
-				{
-					field : 'showStatus', 
-					title : '显示状态：0->不显示；1->显示',
-					sortable: true
-				},
-				{
-					field : 'sort', 
-					title : '',
-					sortable: true
-				},
-				{
-					field : 'icon', 
-					title : '图标',
-					sortable: true
-				},
-				{
-					field : 'keywords', 
-					title : '',
-					sortable: true
-				},
-				{
-					field : 'description', 
-					title : '描述',
-					sortable: true
-				},
-		        {
-		            title: '操作',
-		            align: 'center',
-		            formatter: function(value, row, index) {
-		            	var actions = [];
-		            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
-						return actions.join('');
-		            }
-		        }]
-            };
-            $.table.init(options);
-        });
+		$(function() {
+			localhost();
+		});
+		function clearForm() {
+			$("#form-productCategory-add")[0].reset();
+		}
+		//页面初始化
+		function localhost(){
+				var options = {
+					url: prefix + "/list",
+					createUrl: prefix + "/add",
+					updateUrl: prefix + "/edit/{id}",
+					removeUrl: prefix + "/remove",
+					exportUrl: prefix + "/export",
+					modalName: "产品分类",
+					modalName: "产品分类",
+					search: false,
+					showExport: true,
+					columns: [{
+						checkbox: true
+					},{
+						field : 'id',
+						title : '编号',
+						sortable: true
+					},
+						{
+							field : 'level',
+							title : '分类级别',
+							formatter: function (value, row, index) {
+								if(value==0){
+									return "<span>一级分类</span>"
+								}else {
+									return "<span>二级分类</span>"
+								}
+
+							},
+							sortable: true
+						},
+						{
+							field : 'name',
+							title : '名字',
+							sortable: true
+						},
+						{
+							field : 'level',
+							title : '分类级别',
+							formatter: function (value, row, index) {
+								if(value==0){
+									return "<span>一级分类</span>"
+								}else {
+									return "<span>二级分类</span>"
+								}
+
+							},
+							sortable: true
+						},
+						/*{
+                            field : 'sort',
+                            title : '种类',
+                            sortable: true
+                        },*/
+						{
+							field: 'icon', title: '图片', width: 80,
+							title: '图标',
+							formatter: function (value, row, index) {
+								return "<img src='" + value + "' width='30' height='30'/>";
+							},
+							sortable: true
+						},
+						{
+							field : 'keywords',
+							title : '关键字',
+							sortable: true
+						},
+						{
+							field : 'description',
+							title : '描述',
+							sortable: true
+						},
+						{
+							title : '查看下级类目',
+							align:"center",
+							formatter: function(value, row, index) {
+								var actions = [];
+								/*	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');*/
+								actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="twoClass('+row.id+')"><i class="fa fa-edit"></i>查看</a> ');
+								return actions.join('');
+							}
+						},{
+							title : '添加二级类目',
+							align:"center",
+							formatter: function(value, row, index) {
+								var actions = [];
+								actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="twoProinfos('+row.id+')"><i class="fa fa-edit"></i>添加二级类目</a> ');
+								return actions.join('');
+							}
+						},
+						{
+							title: '操作',
+							align: 'center',
+							formatter: function(value, row, index) {
+								var actions = [];
+								/*	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');*/
+								actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="oneInfo(this)"><i class="fa fa-edit"></i>编辑1</a> ');
+
+								actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+								return actions.join('');
+							}
+						}]
+				};
+			$.table.init(options);
+		}
+		<!--添加方法-->
+		$("#do_upload").click(function () {
+
+			$.ajax({
+				url:"/system/productCategory/adds",
+				data : new FormData($("#form-productCategory-add")[0]),
+				type : "post",
+				contentType : false,
+				processData : false,
+				success:function(data) {
+					console.info(data);
+					$("#myModal").modal("hide");
+					location.reload();
+				}
+
+			});
+		});
+		// 修改一级类目信息
+		function oneInfo(t) {
+			$("#myModal").modal();
+			$("#form-productCategory-add")[0].reset();
+			$("#id").val($(t).parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().text());
+			$("#name").val($(t).parent().prev().prev().prev().prev().prev().prev().prev().text());
+			$("#keywords").val($(t).parent().prev().prev().prev().prev().text());
+			$("#description").val($(t).parent().prev().prev().prev().text());
+		}
+
+		// 弹出显示二级模特框
+		function twoClass(id) {
+			$("#towModal").modal();
+			$.post("/system/productCategory/selectTwo",{id:id},function (data) {
+
+				var tbody=$("#towTable tbody");
+				//清空tbody
+				tbody.empty();
+				for(var index in data.rows){
+					var p = data.rows[index];
+					var tr = $("<tr></tr>");
+					tr.append("<td>"+p.id+"</td>");
+					tr.append("<td>"+p.name+"</td>");
+					tr.append("<td>"+p.level+"</td>");
+					tr.append("<td>"+ "<img src='" + p.icon + "' width='30' height='30'/>"+"</td>");
+					tr.append("<td>"+p.keywords+"</td>");
+					tr.append("<td>"+p.description+"</td>");
+					tr.append("<td>"+'<button onclick="twoleibie(this)">修改</button> '
+							+ '<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="delTwo('+p.id+')" " ><i class="fa fa-remove"></i>删除</a>' +"</td>")
+					tbody.append(tr);
+				}
+				console.info(data);
+			},"json")
+
+		}
+		// 二级类目 信息
+		function  twoleibie(t) {
+			$("#towInfo").modal();
+			$("#twoForms")[0].reset();
+			$("#ids").val($(t).parent().prev().prev().prev().prev().prev().prev().text());
+			$("#names").val($(t).parent().prev().prev().prev().prev().prev().text());
+			$("#keywordss").val($(t).parent().prev().prev().text());
+			$("#descriptions").val($(t).parent().prev().prev().text());
+		}
+		// 修改二级类目信息
+		$("#addTwo").click(function () {
+
+			$.ajax({
+				url: "/system/productCategory/addTwo",
+				data: new FormData($("#twoForms")[0]),
+				type: "post",
+				contentType: false,
+				processData: false,
+				success: function (data) {
+					console.info(data);
+					if (data.code == 0) {
+						$("#towInfo").modal("hide");
+						$("#towModal").modal("hide");
+					}
+
+				}
+
+			}, "json")
+		})
+		//删除二级类目
+		function  delTwo(id) {
+			var r=confirm("你确定删除吗");
+			if (r==true){
+				$.post("/system/productCategory/delTwo",{id:id},function (data) {
+					if(data.code==0){
+						$("#towModal").modal("hide");
+					}
+
+				},"json")
+			}
+
+		}
+
+		function twoProinfos(id) {
+			$("#twoInfoForms")[0].reset();
+			$("#parentId").val(id)
+			$("#towInfos").modal();
+		}
+		// 添加二级类目信息
+		$("#towProInfo").click(function () {
+			$.ajax({
+				url:"/system/productCategory/twoProinfo",
+				data : new FormData($("#twoInfoForms")[0]),
+				type : "post",
+				contentType : false,
+				processData : false,
+				success:function(data) {
+					$("#towInfos").modal("hide");
+				}
+
+			});
+		});
+
     </script>
 </body>
 </html>

@@ -1,6 +1,8 @@
 package com.aaa.repast.admin.project.system.productCategory.service;
 
 import com.aaa.repast.admin.project.system.productCategory.domain.ProductCategory;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 /**
@@ -50,5 +52,45 @@ public interface IProductCategoryService
      * @return 结果
      */
 	public int deleteProductCategoryByIds(String ids);
-	
+
+	//添加的方法
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/2 21:03
+	 * @Description
+	 *
+	 * 添加一级类目
+	 */
+	public Boolean addProductCategory(ProductCategory productCategory, MultipartFile file);
+
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/2 20:40
+	 * @Description
+	 * 根据一级类目的id 查询二级类目的商品信息
+	 */
+	List<ProductCategory> selectTow(Long id);
+
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/3 18:52
+	 * @Description
+	 *  修改二级类目信息
+	 */
+	Boolean twoInfo(ProductCategory productCategory, MultipartFile file);
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/3 19:35
+	 * @Description
+	 * 删除（修改状态）一级类目
+	 */
+	public Boolean delTwoStatus(Long id);
+
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/6 09:45
+	 * @Description
+	 *  添加二级类目
+	 */
+	public Boolean twoProinfo(ProductCategory productCategory,MultipartFile file);
 }

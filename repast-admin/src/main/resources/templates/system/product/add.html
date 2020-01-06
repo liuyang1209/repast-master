@@ -4,8 +4,12 @@
 <head th:include="include :: header"></head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-product-add">
-			<div class="form-group">	
+        <form class="form-horizontal m" id="form-product-add" method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<!---->
+				<li>
+					名字：<input type="file" name="file"/>
+				</li>
 				<label class="col-sm-3 control-label">店铺ID：</label>
 				<div class="col-sm-8">
 					<input id="shopId" name="shopId" class="form-control" type="text">
@@ -243,6 +247,22 @@
 	</div>
     <div th:include="include::footer"></div>
     <script type="text/javascript">
+		//查询所有的店铺信息
+		$(function () {
+			$.get("",function (data) {
+				
+			})
+
+			// 查询所有品牌信息
+
+			// 查询种类信息
+			// 查询所所有产品属性类别
+
+
+		})
+
+
+
 		var prefix = ctx + "system/product"
 		$("#form-product-add").validate({
 			rules:{
@@ -253,9 +273,20 @@
 		});
 		
 		function submitHandler() {
-	        if ($.validate.form()) {
+	        /*if ($.validate.form()) {
 	            $.operate.save(prefix + "/add", $('#form-product-add').serialize());
-	        }
+	        }*/
+
+			$.ajax({
+				url:prefix + "/add",
+				data : new FormData($("#form-product-add")[0]),
+				type : "post",
+				contentType : false,
+				processData : false,
+				success:function(data) {
+				}
+
+			});
 	    }
 	</script>
 </body>

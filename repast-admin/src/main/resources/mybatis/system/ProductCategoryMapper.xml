@@ -35,6 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="keywords != null  and keywords != '' "> and keywords = #{keywords}</if>
              <if test="description != null  and description != '' "> and description = #{description}</if>
          </where>
+         where level=0 and show_status=1
     </select>
     
     <select id="selectProductCategoryById" parameterType="Long" resultMap="ProductCategoryResult">
@@ -86,15 +87,63 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
-	<delete id="deleteProductCategoryById" parameterType="Long">
-        delete from pms_product_category where id = #{id}
-    </delete>
+	<!--<delete id="deleteProductCategoryById" parameterType="Long">
+        delete from pms_product_category where id=#{id}
+    </delete>-->
 	
-    <delete id="deleteProductCategoryByIds" parameterType="String">
+  <!--  <delete id="deleteProductCategoryByIds" parameterType="String">
         delete from pms_product_category where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
-    </delete>
-    
+    </delete>-->
+    <update id="deleteProductCategoryByIds" parameterType="String" >
+        update pms_product_category set show_status=0  where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+    <update id="deleteProductCategoryById" parameterType="Long">
+        update  pms_product_category set show_status=0 where id=#{id}
+    </update>
+
+    <insert id="returnId">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into  pms_product_category (id,name,level,show_status,keywords,description)
+        values (null,#{name},0,1,#{keywords},#{description})
+    </insert>
+
+    <update id="getIcon">
+        update pms_product_category set icon =#{icon} where id=#{id}
+    </update>
+    <!--根据一级类目的id 查询二级类目的商品信息-->
+    <select id="selectTow" resultMap="ProductCategoryResult" >
+        select * from pms_product_category where parent_id=#{id} and show_status=1
+    </select>
+
+
+    <!--修改二级类目的信息(不修改图片)-->
+    <update id="updateTwoInfo">
+        update pms_product_category set name=#{name},keywords=#{keywords},description=#{description}
+        where id=#{id}
+    </update>
+    <!--修改二级类目的信息(修改图片)-->
+    <update id="updateTwoInfoAndImage">
+         update pms_product_category set name=#{name},keywords=#{keywords},description=#{description},icon=#{icon}
+        where id=#{id}
+    </update>
+
+    <!--删除(更改状态)一级类目-->
+    <update id="delTwoStatus">
+        update pms_product_category set show_status=0 where id=#{id}
+    </update>
+
+    <!--添加二级类目信息 -->
+    <insert id="twoProinfo">
+
+        insert  into  pms_product_category (parent_id,name,level,show_status,icon,keywords,description)
+        value (#{parentId},#{name},1,1,#{icon},#{keywords},#{description})
+    </insert>
 </mapper>

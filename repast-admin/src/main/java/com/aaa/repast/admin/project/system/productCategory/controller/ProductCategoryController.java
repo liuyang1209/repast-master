@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aaa.repast.admin.project.system.productCategory.domain.ProductCategory;
 import com.aaa.repast.admin.project.system.productCategory.service.IProductCategoryService;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 产品分类 信息操作处理
@@ -124,5 +125,91 @@ public class ProductCategoryController extends BaseController
 	{		
 		return toAjax(productCategoryService.deleteProductCategoryByIds(ids));
 	}
-	
+
+	//添加的代码
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/2 20:40
+	 * @Description
+	 * 新增保存产品分类
+	 */
+	@RequiresPermissions("system:productCategory:adds")
+	@Log(title = "产品分类", businessType = BusinessType.INSERT)
+	@PostMapping("/adds")
+	@ResponseBody
+	public AjaxResult addSaves(ProductCategory productCategory, MultipartFile file) {
+		Boolean b = productCategoryService.addProductCategory(productCategory, file);
+		if(b){
+			return success();
+		}
+		return error();
+	}
+
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/3 14:46
+	 * @Description
+	 *  根据一级类目的id 查询二级类目的商品信息
+	 */
+
+	@RequiresPermissions("system:productCategory:selectTwo")
+	@Log(title = "产品分类", businessType = BusinessType.INSERT)
+	@PostMapping("/selectTwo")
+	@ResponseBody
+	public TableDataInfo selectTow(Long id) {
+		List<ProductCategory> list = productCategoryService.selectTow(id);
+		return getDataTable(list);
+	}
+
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/3 18:52
+	 * @Description
+	 *  修改二级类目信息
+	 */
+	@RequiresPermissions("system:productCategory:addTwo")
+	@PostMapping("/addTwo")
+	@ResponseBody
+	public AjaxResult addTwo(ProductCategory productCategory, MultipartFile file) {
+		Boolean b = productCategoryService.twoInfo(productCategory, file);
+		if(b){
+			return success();
+		}
+		return error();
+	}
+
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/3 18:52
+	 * @Description
+	 *  删除
+	 */
+	@RequiresPermissions("system:productCategory:delTwo")
+	@PostMapping("/delTwo")
+	@ResponseBody
+	public AjaxResult delTwo(Long id) {
+		Boolean b = productCategoryService.delTwoStatus(id);
+		if(b){
+			return success();
+		}
+		return error();
+	}
+
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/4 01:18
+	 * @Description
+	 * 添加二类目信息
+	 */
+	@RequiresPermissions("system:productCategory:twoProinfo")
+	@PostMapping("/twoProinfo")
+	@ResponseBody
+	public AjaxResult twoProinfo(ProductCategory productCategory,MultipartFile file) {
+		Boolean b = productCategoryService.twoProinfo(productCategory,file);
+		if(b){
+			return success();
+		}
+		return error();
+
+	}
 }
