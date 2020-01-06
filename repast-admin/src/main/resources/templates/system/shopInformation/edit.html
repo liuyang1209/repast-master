@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-shopInformation-edit" th:object="${shopInformation}">
+            <input id="id" name="id" th:field="*{id}"  type="hidden">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">店铺所有者ID：</label>
+				<div class="col-sm-8">
+					<input id="ownerId" name="ownerId" th:field="*{ownerId}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">店铺名称：</label>
+				<div class="col-sm-8">
+					<input id="name" name="name" th:field="*{name}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">省：</label>
+				<div class="col-sm-8">
+					<input id="province" name="province" th:field="*{province}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">市：</label>
+				<div class="col-sm-8">
+					<input id="city" name="city" th:field="*{city}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">区：</label>
+				<div class="col-sm-8">
+					<input id="borough" name="borough" th:field="*{borough}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">地址：</label>
+				<div class="col-sm-8">
+					<input id="address" name="address" th:field="*{address}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">液化天然气：</label>
+				<div class="col-sm-8">
+					<input id="lng" name="lng" th:field="*{lng}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">货币：</label>
+				<div class="col-sm-8">
+					<input id="lat" name="lat" th:field="*{lat}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">是否打烊（手动打烊标示）和营业时间一起使用：</label>
+				<div class="col-sm-8">
+					<input id="closed" name="closed" th:field="*{closed}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">字符串，如：1-5|10:00-14:00，1-5|17:00-22:00，6-7|9:00-24:00  周和时间用“|”分割，周几到周几用“-”分割，多个设置用“，”分割：</label>
+				<div class="col-sm-8">
+					<input id="openTime" name="openTime" th:field="*{openTime}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">商家电话：</label>
+				<div class="col-sm-8">
+					<input id="phone" name="phone" th:field="*{phone}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">商家实景照片URL，json格式 {realimsg:['http://xxx','http://xxx']}：</label>
+				<div class="col-sm-8">
+					<input id="images" name="images" th:field="*{images}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">0：冻结状态，1：正常，2：违规关闭，3：店铺到期关闭：</label>
+				<div class="col-sm-8">
+					<input id="status" name="status" th:field="*{status}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">授权开始时间：</label>
+				<div class="col-sm-8">
+					<input id="authStartTime" name="authStartTime" th:field="*{authStartTime}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">授权时长，单位是月：</label>
+				<div class="col-sm-8">
+					<input id="authLong" name="authLong" th:field="*{authLong}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">授权版本的ID：</label>
+				<div class="col-sm-8">
+					<input id="templateId" name="templateId" th:field="*{templateId}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">营业执照图片链接：</label>
+				<div class="col-sm-8">
+					<input id="businessLicense" name="businessLicense" th:field="*{businessLicense}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">食品安全许可证图片链接：</label>
+				<div class="col-sm-8">
+					<input id="foodLicense" name="foodLicense" th:field="*{foodLicense}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">卫生许可证图片链接：</label>
+				<div class="col-sm-8">
+					<input id="sanitationLicense" name="sanitationLicense" th:field="*{sanitationLicense}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">量化考核图片链接：</label>
+				<div class="col-sm-8">
+					<input id="assess" name="assess" th:field="*{assess}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">合同ID：</label>
+				<div class="col-sm-8">
+					<input id="contractId" name="contractId" th:field="*{contractId}" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "system/shopInformation"
+		$("#form-shopInformation-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/edit", $('#form-shopInformation-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>
