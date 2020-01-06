@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.repast.admin.project.system.brand.mapper.BrandMapper">
+    
+    <resultMap type="Brand" id="BrandResult">
+        <result property="id"    column="id"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="name"    column="name"    />
+        <result property="firstLetter"    column="first_letter"    />
+        <result property="sort"    column="sort"    />
+        <result property="factoryStatus"    column="factory_status"    />
+        <result property="showStatus"    column="show_status"    />
+        <result property="productCount"    column="product_count"    />
+        <result property="productCommentCount"    column="product_comment_count"    />
+        <result property="logo"    column="logo"    />
+        <result property="bigPic"    column="big_pic"    />
+        <result property="brandStory"    column="brand_story"    />
+    </resultMap>
+	
+	<sql id="selectBrandVo">
+        select id, shop_id, name, first_letter, sort, factory_status, show_status, product_count, product_comment_count, logo, big_pic, brand_story from pms_brand
+    </sql>
+
+    <!--查询品牌列表-->
+    <!--<select id="selectBrandList" parameterType="Brand" resultMap="BrandResult">
+        <include refid="selectBrandVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="firstLetter != null  and firstLetter != '' "> and first_letter = #{firstLetter}</if>
+             <if test="sort != null "> and sort = #{sort}</if>
+             <if test="factoryStatus != null "> and factory_status = #{factoryStatus}</if>
+             <if test="showStatus != null "> and show_status = #{showStatus}</if>
+             <if test="productCount != null "> and product_count = #{productCount}</if>
+             <if test="productCommentCount != null "> and product_comment_count = #{productCommentCount}</if>
+             <if test="logo != null  and logo != '' "> and logo = #{logo}</if>
+             <if test="bigPic != null  and bigPic != '' "> and big_pic = #{bigPic}</if>
+             <if test="brandStory != null  and brandStory != '' "> and brand_story = #{brandStory}</if>
+         </where>
+    </select>-->
+
+
+    <!--多表-->
+
+    <select id="selectBrandAll" resultType="com.aaa.repast.admin.project.system.brand.vo.BrandManagementVo" resultMap="BrandResult">
+        select pb.id,pp.shop_id,pb.name,pb.first_letter,pb.sort,pb.factory_status,pb.show_status,pp.stock,pb.logo,pb.big_pic,pb.brand_story,
+			count(pc.product_id) product_id
+				from pms_brand pb
+						left join pms_product pp on pb.id=pp.brand_id
+						left join pms_comment pc on pp.id=pc.product_id
+						group by pc.product_id
+    </select>
+
+
+
+
+
+    <!--查询品牌信息、搜索-->
+    <select id="selectBrandById" parameterType="Long" resultMap="BrandResult">
+        <include refid="selectBrandVo"/>
+        where id = #{id}
+    </select>
+
+
+    <!--添加-->
+    <insert id="insertBrand" parameterType="Brand">
+        insert into pms_brand
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="firstLetter != null  and firstLetter != ''  ">first_letter,</if>
+			<if test="sort != null  ">sort,</if>
+			<if test="factoryStatus != null  ">factory_status,</if>
+			<if test="showStatus != null  ">show_status,</if>
+			<if test="productCount != null  ">product_count,</if>
+			<if test="productCommentCount != null  ">product_comment_count,</if>
+			<if test="logo != null  and logo != ''  ">logo,</if>
+			<if test="bigPic != null  and bigPic != ''  ">big_pic,</if>
+			<if test="brandStory != null  and brandStory != ''  ">brand_story,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="firstLetter != null  and firstLetter != ''  ">#{firstLetter},</if>
+			<if test="sort != null  ">#{sort},</if>
+			<if test="factoryStatus != null  ">#{factoryStatus},</if>
+			<if test="showStatus != null  ">#{showStatus},</if>
+			<if test="productCount != null  ">#{productCount},</if>
+			<if test="productCommentCount != null  ">#{productCommentCount},</if>
+			<if test="logo != null  and logo != ''  ">#{logo},</if>
+			<if test="bigPic != null  and bigPic != ''  ">#{bigPic},</if>
+			<if test="brandStory != null  and brandStory != ''  ">#{brandStory},</if>
+         </trim>
+    </insert>
+
+    <!--更新-->
+    <update id="updateBrand" parameterType="Brand">
+        update pms_brand
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="firstLetter != null  and firstLetter != ''  ">first_letter = #{firstLetter},</if>
+            <if test="sort != null  ">sort = #{sort},</if>
+            <if test="factoryStatus != null  ">factory_status = #{factoryStatus},</if>
+            <if test="showStatus != null  ">show_status = #{showStatus},</if>
+            <if test="productCount != null  ">product_count = #{productCount},</if>
+            <if test="productCommentCount != null  ">product_comment_count = #{productCommentCount},</if>
+            <if test="logo != null  and logo != ''  ">logo = #{logo},</if>
+            <if test="bigPic != null  and bigPic != ''  ">big_pic = #{bigPic},</if>
+            <if test="brandStory != null  and brandStory != ''  ">brand_story = #{brandStory},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <!--根据品牌id删除-->
+	<delete id="deleteBrandById" parameterType="Long">
+        delete from pms_brand where id = #{id}
+    </delete>
+	
+    <delete id="deleteBrandByIds" parameterType="String">
+        delete from pms_brand where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
