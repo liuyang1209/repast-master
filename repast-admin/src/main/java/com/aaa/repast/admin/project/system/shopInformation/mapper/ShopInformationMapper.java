@@ -1,7 +1,9 @@
 package com.aaa.repast.admin.project.system.shopInformation.mapper;
 
 import com.aaa.repast.admin.project.system.shopInformation.domain.ShopInformation;
-import java.util.List;	
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * 店铺的基本 数据层
@@ -9,6 +11,7 @@ import java.util.List;
  * @author Seven Lee
  * @date 2020-01-06
  */
+@Repository
 public interface ShopInformationMapper 
 {
 	/**
@@ -58,5 +61,22 @@ public interface ShopInformationMapper
      * @return 结果
      */
 	public int deleteShopInformationByIds(String[] ids);
-	
+
+
+	// 刘扬写的代码：
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/6 20:23
+	 * @Description
+	 * 查询所有的店铺
+	 */
+	public List<ShopInformation> getShopinformation();
+
+
+	//董彤彤
+	/**
+	 * 查询店铺的名称信息
+	 * @return 店铺的名称信息
+	 */
+	public List<ShopInformation> selectShopInformationName();
 }

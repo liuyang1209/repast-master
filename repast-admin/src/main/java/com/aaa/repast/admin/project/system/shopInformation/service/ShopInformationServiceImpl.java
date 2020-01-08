@@ -78,5 +78,28 @@ public class ShopInformationServiceImpl implements IShopInformationService
 	{
 		return shopInformationMapper.deleteShopInformationByIds(Convert.toStrArray(ids));
 	}
-	
+	// 刘扬写的代码：
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/6 20:23
+	 * @Description
+	 * 查询所有的店铺
+	 */
+	@Override
+	public List<ShopInformation> getShopinformation(){
+		return  shopInformationMapper.getShopinformation();
+	}
+
+
+	//董彤彤
+	/**
+	 * 查询店铺的名称信息
+	 * @return 店铺的名称信息
+	 */
+	@Override
+	public List<ShopInformation> selectShopInformationName() {
+		List<ShopInformation> shopInformations = shopInformationMapper.selectShopInformationName();
+		return shopInformations;
+	}
+
 }

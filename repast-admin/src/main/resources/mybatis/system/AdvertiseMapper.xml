@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.repast.admin.project.system.advertise.mapper.AdvertiseMapper">
+
+    <resultMap type="Advertise" id="AdvertiseResult">
+        <result property="id" column="id"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="name" column="name"/>
+        <result property="positionId" column="position_id"/>
+        <result property="pic" column="pic"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="status" column="status"/>
+        <result property="clickCount" column="click_count"/>
+        <result property="orderCount" column="order_count"/>
+        <result property="url" column="url"/>
+        <result property="note" column="note"/>
+        <result property="sort" column="sort"/>
+        <result property="delStatus" column="del_status"/>
+    </resultMap>
+
+    <sql id="selectAdvertiseVo">
+        select id, shop_id, name, position_id, pic, start_time, end_time, status, click_count, order_count, url, note, sort,del_status from sms_advertise
+    </sql>
+    <sql id="selectAdvertiseAndPositonVo">
+        select sa.id, sa.shop_id shopId, sa.name, sa.position_id positionId, sa.pic, sa.start_time startTime, sa.end_time endTime, sa.status, sa.click_count clickCount, sa.order_count orderCount, sa.url,
+        sa.note, sa.sort,sa.del_status delStatus,sap.name positionName ,usi.name shopName from sms_advertise sa,sms_advertise_position sap,ums_shop_information usi
+    </sql>
+
+    <select id="selectAdvertiseList"  resultType="com.aaa.repast.admin.project.system.advertise.domain.AdvertiseAndPositionVo">
+        <include refid="selectAdvertiseAndPositonVo"/>
+        <where>
+            <if test="id != null ">and id = #{id}</if>
+            <if test="shopId != null ">and shop_id = #{shopId}</if>
+            <if test="shopName != null ">and usi.name = #{shopName}</if>
+            <if test="name != null  and name != '' ">and name = #{name}</if>
+            <if test="positionId != null ">and position_id = #{positionId}</if>
+            <if test="positionName != null ">and sap.name = #{positionName}</if>
+            <if test="pic != null  and pic != '' ">and pic = #{pic}</if>
+            <if test="startTime != null ">and start_time = #{startTime}</if>
+            <if test="endTime != null ">and end_time = #{endTime}</if>
+            <if test="status != null ">and status = #{status}</if>
+            <if test="clickCount != null ">and click_count = #{clickCount}</if>
+            <if test="orderCount != null ">and order_count = #{orderCount}</if>
+            <if test="url != null  and url != '' ">and url = #{url}</if>
+            <if test="note != null  and note != '' ">and note = #{note}</if>
+            <if test="sort != null ">and sort = #{sort}</if>
+            <if test="delStatus != null ">and del_status = #{delStatus}</if>
+            sa.position_id=sap.id and sa.shop_id=usi.id and sa.del_status=1
+        </where>
+    </select>
+
+    <select id="selectAdvertiseById" parameterType="Long" resultType="com.aaa.repast.admin.project.system.advertise.domain.AdvertiseAndPositionVo">
+        <include refid="selectAdvertiseAndPositonVo"/>
+        where sa.id = #{id} and sa.position_id=sap.id and sa.shop_id=usi.id and sa.del_status=1
+    </select>
+
+    <insert id="insertAdvertise" parameterType="Advertise">
+        insert into sms_advertise
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null  ">id,</if>
+            <if test="shopId != null  ">shop_id,</if>
+            <if test="name != null  and name != ''  ">name,</if>
+            <if test="positionId != null  ">position_id,</if>
+            <if test="pic != null  and pic != ''  ">pic,</if>
+            <if test="startTime != null  ">start_time,</if>
+            <if test="endTime != null  ">end_time,</if>
+            <if test="status != null  ">status,</if>
+            <if test="clickCount != null  ">click_count,</if>
+            <if test="orderCount != null  ">order_count,</if>
+            <if test="url != null  and url != ''  ">url,</if>
+            <if test="note != null  and note != ''  ">note,</if>
+            <if test="sort != null  ">sort,</if>
+            <if test="delStatus != null  ">del_status,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null  ">#{id},</if>
+            <if test="shopId != null  ">#{shopId},</if>
+            <if test="name != null  and name != ''  ">#{name},</if>
+            <if test="positionId != null  ">#{positionId},</if>
+            <if test="pic != null  and pic != ''  ">#{pic},</if>
+            <if test="startTime != null  ">#{startTime},</if>
+            <if test="endTime != null  ">#{endTime},</if>
+            <if test="status != null  ">#{status},</if>
+            <if test="clickCount != null  ">#{clickCount},</if>
+            <if test="orderCount != null  ">#{orderCount},</if>
+            <if test="url != null  and url != ''  ">#{url},</if>
+            <if test="note != null  and note != ''  ">#{note},</if>
+            <if test="sort != null  ">#{sort},</if>
+            <if test="delStatus != null  ">1,</if>
+        </trim>
+    </insert>
+
+    <update id="updateAdvertise" parameterType="Advertise">
+        update sms_advertise
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="positionId != null  ">position_id = #{positionId},</if>
+            <if test="pic != null  and pic != ''  ">pic = #{pic},</if>
+            <if test="startTime != null  ">start_time = #{startTime},</if>
+            <if test="endTime != null  ">end_time = #{endTime},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="clickCount != null  ">click_count = #{clickCount},</if>
+            <if test="orderCount != null  ">order_count = #{orderCount},</if>
+            <if test="url != null  and url != ''  ">url = #{url},</if>
+            <if test="note != null  and note != ''  ">note = #{note},</if>
+            <if test="sort != null  ">sort = #{sort},</if>
+            <if test="delStatus != null  ">del_status = #{delStatus},</if>
+        </trim>
+        where id = #{id}
+    </update>
+    <update id="deleteAdvertiseById" parameterType="Advertise">
+         update sms_advertise set del_status=0 where id=#{id}
+    </update>
+
+   <!-- <delete id="deleteAdvertiseById" parameterType="Long">
+        delete from sms_advertise where id = #{id}
+    </delete>-->
+
+    <delete id="deleteAdvertiseByIds" parameterType="String">
+        delete from sms_advertise where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <update id="status" parameterType="Advertise">
+         update sms_advertise set status=#{status} where id=#{id}
+    </update>
+</mapper>

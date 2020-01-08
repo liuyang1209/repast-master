@@ -91,4 +91,15 @@ public class BrandServiceImpl implements IBrandService
 		return brandMapper.selectBrandAll(brandManagementVo);
 	}
 
+	// 刘扬
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/6 21:30
+	 * @Description
+	 *  查询品牌的id 和名字
+	 */
+	@Override
+	public List<Brand> selectBrand(){
+		return brandMapper.selectBrand();
+	}
 }

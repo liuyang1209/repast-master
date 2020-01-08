@@ -195,6 +195,240 @@
 			</div>
 		</div>
 	</div>
+	 <!--模态框-->
+	 <div class="modal fade" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		 <div class="modal-dialog" role="document">
+			 <div class="modal-content">
+				 <div class="modal-header">
+					 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					 <h4 class="modal-title" id="twoModalLabelInfos">Modal title</h4>
+				 </div>
+				 <div class="modal-body">
+
+					 <!--表单开始-->
+					 <form class="form-horizontal m" id="form-product-update" method="post" enctype="multipart/form-data">
+						<input id="id" name="id" type="text">
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">选择店铺：</label>
+							 <div class="col-sm-8">
+								 <select id="shopId" class="form-control" name="shopId">
+								 </select>
+							 </div>
+						 </div>
+
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">选择品牌：</label>
+							 <div class="col-sm-8">
+								 <select id="brandId" class="form-control" name="brandId">
+
+								 </select>
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">选择类别：</label>
+							 <div class="col-sm-8">
+								 <select id="productCategoryId" class="form-control" name="productCategoryId">
+
+								 </select>
+							 </div>
+						 </div>
+						 <div class="form-group">
+
+							 <label class="col-sm-3 control-label">产品属性类别：</label>
+							 <div class="col-sm-8">
+								 <select id="productAttributeCategoryId" class="form-control" name="productAttributeCategoryId">
+
+								 </select>
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">名字：</label>
+							 <div class="col-sm-8">
+								 <input id="name" name="name" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">图片路径：</label>
+							 <div class="col-sm-8">
+								 <input id="file" name="file" class="form-control" type="file">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">货号：</label>
+							 <div class="col-sm-8">
+								 <input id="productSn" name="productSn" class="form-control" type="text">
+							 </div>
+						 </div>
+
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">新品状态:0->不是新品；1->新品：</label>
+							 <div class="col-sm-8">
+								 <select id="newStatus" class="form-control" name="newStatus">
+									 <option value="0">不是新品</option>
+									 <option value="1">新品</option>
+								 </select>
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">推荐状态；0->不推荐；1->推荐：</label>
+							 <div class="col-sm-8">
+
+								 <select id="recommandStatus" class="form-control" name="recommandStatus">
+									 <option value="0">不推荐</option>
+									 <option value="1">推荐</option>
+								 </select>
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">排序：</label>
+							 <div class="col-sm-8">
+								 <input id="sort" name="sort" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">销量：</label>
+							 <div class="col-sm-8">
+								 <input id="sale" name="sale" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">价格：</label>
+							 <div class="col-sm-8">
+								 <input id="price" name="price" class="form-control" type="text">
+							 </div>
+						 </div>
+
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">副标题：</label>
+							 <div class="col-sm-8">
+								 <input id="subTitle" name="subTitle" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">商品描述：</label>
+							 <div class="col-sm-8">
+								 <input id="description" name="description" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">市场价：</label>
+							 <div class="col-sm-8">
+								 <input id="originalPrice" name="originalPrice" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">库存：</label>
+							 <div class="col-sm-8">
+								 <input id="stock" name="stock" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">库存预警值：</label>
+							 <div class="col-sm-8">
+								 <input id="lowStock" name="lowStock" class="form-control" type="text">
+							 </div>
+						 </div>
+
+
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">单位：</label>
+							 <div class="col-sm-8">
+								 <select  id="dianWei" class="form-control" style="width: 200px">
+									 <option>请选择</option>
+									 <option value="0">规格</option>
+									 <option value="1">参数</option>
+								 </select>
+								 <select id="unit" class="form-control" name="unit"style="width: 200px">
+								 </select>
+							 </div>
+						 </div>
+
+
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">商品重量，默认为克：</label>
+							 <div class="col-sm-8">
+								 <input id="weight" name="weight" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮：</label>
+							 <div class="col-sm-8">
+								 <select id="serviceIds"  multiple="multiple" class="form-control" name="serviceIds"style="width: 200px">
+									 <option value="1">无忧退货</option>
+									 <option value="2">快速退款</option>
+									 <option value="3">免费包邮</option>
+								 </select>
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">关键字：</label>
+							 <div class="col-sm-8">
+								 <input id="keywords" name="keywords" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">注意事项：</label>
+							 <div class="col-sm-8">
+								 <input id="note" name="note" class="form-control" type="text">
+							 </div>
+						 </div>
+
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">详细标题：</label>
+							 <div class="col-sm-8">
+								 <input id="detailTitle" name="detailTitle" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">细节：</label>
+							 <div class="col-sm-8">
+								 <input id="detailDesc" name="detailDesc" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">产品详情网页内容：</label>
+							 <div class="col-sm-8">
+								 <input id="detailHtml" name="detailHtml" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">移动端网页详情：</label>
+							 <div class="col-sm-8">
+								 <input id="detailMobileHtml" name="detailMobileHtml" class="form-control" type="text">
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">币种，0-> 人民币;  1-> 积分：</label>
+							 <div class="col-sm-8">
+
+								 <select id="currency"  class="form-control" name="currency"style="width: 200px">
+									 <option value="0">人民币</option>
+									 <option value="1">积分</option>
+								 </select>
+							 </div>
+						 </div>
+						 <div class="form-group">
+							 <label class="col-sm-3 control-label">霸王餐0-->参加,1-->不参加：</label>
+							 <div class="col-sm-8">
+								 <select id="free"  class="form-control" name="free"style="width: 200px">
+									 <option value="0">参加</option>
+									 <option value="1">不参加</option>
+
+								 </select>
+							 </div>
+						 </div>
+					 </form>
+					 <!--表单结束-->
+				 </div>
+				 <div class="modal-footer">
+					 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					 <button type="button" class="btn btn-primary" id="updateProduct">确定</button>
+				 </div>
+			 </div>
+		 </div>
+	 </div>
+
+	 <!--结束-->
     <div th:include="include :: footer"></div>
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('system:product:edit')}]];
@@ -202,8 +436,50 @@
         var prefix = ctx + "system/product";
 
         $(function() {
+			$.get(prefix+"/selectProduct",function (data) {
+				console.info(data);
+				var sel = $("#shopId");
+				sel.empty();
+				for (var index in data) {
+					var position = data[index];
+					sel.append("<option value=" + position.id + ">" + position.name + "</option>");
+				}
+			},"json")
+
+			// 查询所有品牌信息
+			$.get(prefix+"/selectBrand",function (data) {
+				console.info(data);
+				var sel = $("#brandId");
+				sel.empty();
+				for (var index in data) {
+					var position = data[index];
+					sel.append("<option value=" + position.id + ">" + position.name + "</option>");
+				}
+			},"json")
+			// 查询种类信息
+			$.get(prefix+"/selectProductCategory",function (data) {
+				console.info(data);
+				var sel = $("#productCategoryId");
+				sel.empty();
+				for (var index in data) {
+					var position = data[index];
+					sel.append("<option value=" + position.id + ">" + position.name + "</option>");
+				}
+			},"json")
+
+			// 查询所所有产品属性类别
+			$.get(prefix+"/selectProductAttributeCategory",function (data) {
+				console.info(data);
+				var sel = $("#productAttributeCategoryId");
+				sel.empty();
+				for (var index in data) {
+					var position = data[index];
+					sel.append("<option value=" + position.id + ">" + position.name + "</option>");
+				}
+			},"json")
+
             var options = {
-                url: prefix + "/list",
+                url: prefix + "/ProductVos",
                 createUrl: prefix + "/add",
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
@@ -220,23 +496,23 @@
 					visible: false
 				},
 				{
-					field : 'shopId', 
-					title : '店铺ID',
+					field : 'shopName',
+					title : '店铺名称',
 					sortable: true
 				},
 				{
-					field : 'brandId', 
-					title : '品牌ID',
+					field : 'brandNames',
+					title : '品牌名称',
 					sortable: true
 				},
 				{
-					field : 'productCategoryId', 
-					title : '产品类别ID',
+					field : 'productCategoryNames',
+					title : '产品类别名称',
 					sortable: true
 				},
 				{
-					field : 'productAttributeCategoryId', 
-					title : '产品属性类别ID',
+					field : 'productAttributeCategoryName',
+					title : '产品属性类别名称',
 					sortable: true
 				},
 				{
@@ -247,6 +523,9 @@
 				{
 					field : 'pic', 
 					title : '图片路径',
+					formatter: function (value, row, index) {
+						return "<img src='" + value + "' width='30' height='30'/>";
+					},
 					sortable: true
 				},
 				{
@@ -257,21 +536,54 @@
 				{
 					field : 'deleteStatus', 
 					title : '删除状态：0->未删除；1->已删除',
+					formatter: function (value, row, index) {
+						if(value==0){
+							return '<a class=" btn btn-success btn-xs" href="#" onclick="stop(\'' + row.id + '\')"><i class="fa fa-close"></i>未删除</a> ';
+						}else {
+							return  '<a class=" btn btn-danger btn-xs" href="#" onclick="start(\'' + row.id + '\')"><i class="fa fa-check"></i>已删除</a> ';
+						}
+
+					},
 					sortable: true
 				},
 				{
 					field : 'publishStatus', 
 					title : '上架状态：0->下架；1->上架',
+					formatter: function (value, row, index) {
+						if(value==0){
+							return '<a class=" btn btn-danger btn-xs" href="#" onclick=" pStart(\'' + row.id + '\')"><i class="fa fa-close"></i>下架中</a> ';
+						}else {
+							return  '<a class="  btn btn-success btn-xs" href="#" onclick="pStop(\'' + row.id + '\')"><i class="fa fa-check"></i>上架中</a> ';
+						}
+
+					},
 					sortable: true
 				},
 				{
 					field : 'newStatus', 
 					title : '新品状态:0->不是新品；1->新品',
+					formatter: function (value, row, index) {
+						if(value==0){
+
+							return '<a class="btn btn-danger btn-xs  " href="#" onclick=" newStop(\'' + row.id + '\')"><i class="fa fa-close"></i>不是新品</a> ';
+						}else {
+							return '<a class=" btn btn-success btn-xs" href="#" onclick=" newStart(\'' + row.id + '\')"><i class="fa fa-close"></i>新品</a> ';
+						}
+
+					},
 					sortable: true
 				},
 				{
 					field : 'recommandStatus', 
 					title : '推荐状态；0->不推荐；1->推荐',
+					formatter: function (value, row, index) {
+						if(value==0){
+							return "<span>不推荐</span>"
+						}else {
+							return "<span>推荐</span>"
+						}
+
+					},
 					sortable: true
 				},
 				{
@@ -337,6 +649,16 @@
 				{
 					field : 'serviceIds', 
 					title : '以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮',
+					formatter: function (value, row, index) {
+						if(value==1){
+							return "<span>无忧退货</span>"
+						}else if (value==2){
+							return "<span>快速退款</span>"
+						}else {
+							return "<span>免费包邮</span>"
+						}
+
+					},
 					sortable: true
 				},
 				{
@@ -349,11 +671,11 @@
 					title : '注意事项',
 					sortable: true
 				},
-				{
+				/*{
 					field : 'albumId', 
 					title : '画册id',
 					sortable: true
-				},
+				},*/
 				{
 					field : 'detailTitle', 
 					title : '详细标题',
@@ -374,7 +696,7 @@
 					title : '移动端网页详情',
 					sortable: true
 				},
-				{
+				/*{
 					field : 'promotionStartTime', 
 					title : '促销开始时间',
 					sortable: true
@@ -388,13 +710,28 @@
 					field : 'promotionPerLimit', 
 					title : '活动限购数量',
 					sortable: true
-				},
+				},*/
 				{
 					field : 'promotionType', 
 					title : '促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购',
+					formatter: function (value, row, index) {
+						if(value==1){
+							return "<span>使用促销价</span>"
+						}else if (value==2){
+							return "<span>使用会员价</span>"
+						}else if(value=3){
+							return "<span>使用阶梯价格</span>"
+						}else  if(value==4){
+							return "<span>使用满减价格</span>"
+						}else if (value==0) {
+							return "<span>限时购</span>"
+						}else {
+							return "<span>没有促销使用原价</span>"
+						}
+					},
 					sortable: true
 				},
-				{
+				/*{
 					field : 'brandName', 
 					title : '品牌名称',
 					sortable: true
@@ -403,15 +740,29 @@
 					field : 'productCategoryName', 
 					title : '商品分类名称',
 					sortable: true
-				},
+				},*/
 				{
 					field : 'currency', 
 					title : '币种，0-> 人民币;  1-> 积分',
+					formatter: function (value, row, index) {
+						if(value==0){
+							return "<span>人民币</span>"
+						}else {
+							return "<span>积分</span>"
+						}
+					},
 					sortable: true
 				},
 				{
 					field : 'free', 
 					title : '霸王餐0-->参加,1-->不参加',
+					formatter: function (value, row, index) {
+						if(value==0){
+							return "<span>参加</span>"
+						}else {
+							return "<span>不参加</span>"
+						}
+					},
 					sortable: true
 				},
 		        {
@@ -419,7 +770,8 @@
 		            align: 'center',
 		            formatter: function(value, row, index) {
 		            	var actions = [];
-		            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+		            	/*actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');*/
+						actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="editProduct('+ row.id+')"><i class="fa fa-edit"></i>编辑</a> ');
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
 						return actions.join('');
 		            }
@@ -427,6 +779,97 @@
             };
             $.table.init(options);
         });
+		function editProduct(id) {
+			$("#editProduct").modal();
+			$("#id").val(id)
+
+			$.post(prefix + "/findByIdProduct",{id:id},function (data) {
+				console.info(data)
+				$("#shopId").val(data.shopId);
+				$("#brandId").val(data.brandId);
+				$("#productCategoryId").val(data.productCategoryId);
+				$("#productAttributeCategoryId").val(data.productAttributeCategoryId);
+				$("#newStatus").val(data.newStatus);
+				$("#recommandStatus").val(data.recommandStatus);
+				$("#serviceIds").val(data.serviceIds);
+				$("#currency").val(data.currency);
+				$("#free").val(data.free);
+			},"json")
+
+		}
+		//二级联动 根据商品的类型查询商品的属性
+		$("#dianWei").change(function () {
+			var type = $("#dianWei option:selected").val();
+			$.post(prefix+"/selectAttributeByType",{type:type},function (data) {
+				var sel = $("#unit");
+				sel.empty();
+				for (var index in data) {
+					var position = data[index];
+					sel.append("<option value=" + position.id + ">" + position.name + "</option>");
+				}
+			},"json")
+
+		})
+
+		// 修改商品信息
+		$("#updateProduct").click(function () {
+			$.ajax({
+				url:prefix+"/updateFindByIdProduct",
+				data : new FormData($("#form-product-update")[0]),
+				type : "post",
+				contentType : false,
+				processData : false,
+				success:function(data) {
+					location.reload();
+				}
+
+			});
+		});
+		// 删除状态
+		/*调度任务-停用*/
+		function stop(id) {
+			$.modal.confirm("确认要删除吗？", function() {
+				$.operate.post(prefix + "/status", { "id": id, "status": 1 });
+			})
+		}
+
+		/*调度任务-启用*/
+		function start(id) {
+			$.modal.confirm("确认要取消删除吗？", function() {
+				$.operate.post(prefix + "/status", { "id": id, "status": 0 });
+			})
+		}
+ 		// 上下架状态
+		function pStop(id) {
+			$.modal.confirm("确认要下架吗吗？", function() {
+				$.operate.post(prefix + "/publishStatus", { "id": id, "status": 0 });
+			})
+		}
+
+		/*调度任务-启用*/
+		function pStart(id) {
+			$.modal.confirm("确认要上架吗？", function() {
+				$.operate.post(prefix + "/publishStatus", { "id": id, "status": 1});
+			})
+		}
+
+		// 是否是新品
+
+		function newStop(id) {
+			$.modal.confirm("更改为新品？", function() {
+				$.operate.post(prefix + "/newStatus", { "id": id, "status": 1 });
+			})
+		}
+
+		/*调度任务-启用*/
+		function newStart(id) {
+			$.modal.confirm("取消新品？", function() {
+				$.operate.post(prefix + "/newStatus", { "id": id, "status": 0});
+			})
+		}
+
+
+
     </script>
 </body>
 </html>

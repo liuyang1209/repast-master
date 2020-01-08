@@ -146,4 +146,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert  into  pms_product_category (parent_id,name,level,show_status,icon,keywords,description)
         value (#{parentId},#{name},1,1,#{icon},#{keywords},#{description})
     </insert>
+
+    <select id="selectTwoProduct" resultMap="ProductCategoryResult">
+
+        select id,name from  pms_product_category where level=1 and show_status=1
+    </select>
 </mapper>

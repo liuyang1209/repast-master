@@ -2,7 +2,9 @@ package com.aaa.repast.admin.project.system.brand.mapper;
 
 import com.aaa.repast.admin.project.system.brand.vo.BrandManagementVo;
 import com.aaa.repast.admin.project.system.brand.domain.Brand;
-import java.util.List;	
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * 品牌 数据层
@@ -10,6 +12,7 @@ import java.util.List;
  * @author Seven Lee
  * @date 2019-12-28
  */
+@Repository
 public interface BrandMapper 
 {
 	/**
@@ -65,5 +68,15 @@ public interface BrandMapper
 	 *liyong
 	 */
 	public List<BrandManagementVo> selectBrandAll(BrandManagementVo brandManagementVo);
+
+
+	// 刘扬
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/6 21:30
+	 * @Description
+	 *  查询品牌的id 和名字
+	 */
+	public List<Brand> selectBrand();
 	
 }

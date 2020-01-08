@@ -85,5 +85,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectShuXing" parameterType="Long" resultType="com.aaa.repast.admin.project.system.productAttributeCategory.vo.ProductAttributeCategoryVo">
         select name from pms_product_attribute where type =1 and  product_attribute_category_id=#{id}
     </select>
-    
+
+
+    <!--刘扬-->
+    <!--查询商品属性id 和名字-->
+    <select id="selectProductAttribute" resultMap="ProductAttributeCategoryResult">
+        select id,name from pms_product_attribute_category where state=1
+    </select>
+
+
+
 </mapper>

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "spring.ftp")
 public class FtpProperties {
     //ftp服务器的ip地址
-    private String ipAddr="192.168.1.4";
+    private String ipAddr="192.168.1.6";
     //ftp服务器的端口号
     private Integer port=21;
     private String username="ftpuser";
@@ -21,7 +21,7 @@ public class FtpProperties {
     // ftp服务器的根目录(图片的根目录)
     private String basePath="/home/ftp/www";
     //ftp服务器的显示地址
-    private String httpPath="http://192.168.1.4";
+    private String httpPath="http://192.168.1.6";
 
     public String getIpAddr() {
         return ipAddr;

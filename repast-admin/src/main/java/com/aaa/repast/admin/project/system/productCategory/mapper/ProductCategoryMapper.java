@@ -123,4 +123,11 @@ public interface ProductCategoryMapper
 
 	  public  Integer twoProinfo(ProductCategory productCategory);
 
-}
+	  /**
+ * @Author Yang
+ * @Date Create in  2020/1/6 21:50
+ * @Description
+ * 查询二级类目
+ */
+public  List<ProductCategory> selectTwoProduct();
+ }

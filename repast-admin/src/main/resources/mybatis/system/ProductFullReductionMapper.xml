@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.repast.admin.project.system.productFullReduction.mapper.ProductFullReductionMapper">
+    
+    <resultMap type="ProductFullReduction" id="ProductFullReductionResult">
+        <result property="id"    column="id"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="productId"    column="product_id"    />
+        <result property="fullPrice"    column="full_price"    />
+        <result property="reducePrice"    column="reduce_price"    />
+    </resultMap>
+	
+	<sql id="selectProductFullReductionVo">
+        select id, shop_id, product_id, full_price, reduce_price from pms_product_full_reduction
+    </sql>
+	
+    <select id="selectProductFullReductionList" parameterType="ProductFullReduction" resultMap="ProductFullReductionResult">
+        <include refid="selectProductFullReductionVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="productId != null "> and product_id = #{productId}</if>
+             <if test="fullPrice != null "> and full_price = #{fullPrice}</if>
+             <if test="reducePrice != null "> and reduce_price = #{reducePrice}</if>
+         </where>
+    </select>
+    
+    <select id="selectProductFullReductionById" parameterType="Long" resultMap="ProductFullReductionResult">
+        <include refid="selectProductFullReductionVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertProductFullReduction" parameterType="ProductFullReduction">
+        insert into pms_product_full_reduction
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="productId != null  ">product_id,</if>
+			<if test="fullPrice != null  ">full_price,</if>
+			<if test="reducePrice != null  ">reduce_price,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="productId != null  ">#{productId},</if>
+			<if test="fullPrice != null  ">#{fullPrice},</if>
+			<if test="reducePrice != null  ">#{reducePrice},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateProductFullReduction" parameterType="ProductFullReduction">
+        update pms_product_full_reduction
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="productId != null  ">product_id = #{productId},</if>
+            <if test="fullPrice != null  ">full_price = #{fullPrice},</if>
+            <if test="reducePrice != null  ">reduce_price = #{reducePrice},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteProductFullReductionById" parameterType="Long">
+        delete from pms_product_full_reduction where id = #{id}
+    </delete>
+	
+    <delete id="deleteProductFullReductionByIds" parameterType="String">
+        delete from pms_product_full_reduction where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <insert id="insetFullReduction">
+        insert into pms_product_full_reduction value (null,#{shopId},#{productId},#{fullPrice},#{reducePrice})
+    </insert>
+    
+</mapper>

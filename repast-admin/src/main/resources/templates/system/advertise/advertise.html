@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            店铺id：<input type="text" name="shopId"/>
+                        </li>
+                      <!--  <li>
+                            店铺名称：<input type="text" name="shopName"/>
+                        </li>-->
+
+                        <li>
+                            广告名称：<input type="text" name="name"/>
+                        </li>
+
+                        <li>
+                            轮播位置：<input type="text" name="positionId"/>
+                        </li>
+
+                        <li>
+                            轮播位置2：<input type="text" name="positionName"/>
+                        </li>
+
+                        <li>
+                            广告图片：<input type="text" name="pic"/>
+                        </li>
+
+                        <li>
+                            开始时间：<input type="text" name="startTime"/>
+                        </li>
+
+                        <li>
+                            结束时间：<input type="text" name="endTime"/>
+                        </li>
+
+                        <li>
+                            上下线状态：：<input type="text" name="status"/>
+
+                        </li>
+
+                        <li>
+                            点击数：<input type="text" name="clickCount"/>
+                        </li>
+
+                        <li>
+                            下单数：<input type="text" name="orderCount"/>
+                        </li>
+
+                        <li>
+                            链接地址：<input type="text" name="url"/>
+                        </li>
+
+                        <li>
+                            备注：<input type="text" name="note"/>
+                        </li>
+
+                        <li>
+                            排序：<input type="text" name="sort"/>
+                        </li>
+
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
+                                    class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i
+                                    class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:advertise:add">
+                <i class="fa fa-plus"></i> 添加
+            </a>
+            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()"
+               shiro:hasPermission="system:advertise:edit">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+            <a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()"
+               shiro:hasPermission="system:advertise:remove">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:advertise:export">
+                <i class="fa fa-download"></i> 导出
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table" data-mobile-responsive="true"></table>
+        </div>
+    </div>
+</div>
+<div th:include="include :: footer"></div>
+<script th:inline="javascript">
+    var editFlag = [[${@permission.hasPermi('system:advertise:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('system:advertise:remove')}]];
+    var prefix = ctx + "system/advertise";
+
+    $(function () {
+        var options = {
+            url: prefix + "/list",
+            createUrl: prefix + "/add",
+            updateUrl: prefix + "/edit/{id}",
+            removeUrl: prefix + "/remove",
+            exportUrl: prefix + "/export",
+            modalName: "广告位",
+            search: false,
+            showExport: true,
+            columns: [{
+                checkbox: true
+            },
+                {
+                    field: 'id',
+                    title: 'id',
+                    visible: false
+                },
+                {
+                    field: 'shopId',
+                    title: '店铺id',
+                    visible: false
+                },
+                {
+                    field: 'shopName',
+                    title: '店铺名称',
+                    sortable: true
+                },
+                {
+                    field: 'name',
+                    title: '广告名称',
+                    sortable: true
+                },
+                /*{
+                    field: 'positionId',
+                    title: '轮播位置',
+                    sortable: false
+                },*/
+                {
+                    field: 'positionName',
+                    title: '轮播位置',
+                    sortable: true
+                },
+                {
+                    field: 'pic',
+                    title: '图片',
+                    formatter: function (value, row, index) {
+                        return "<img src='" + value + "' width='40' height='50'/>";
+                    },
+                    sortable: true
+                },
+                {
+                    field: 'startTime',
+                    title: '开始时间',
+                    sortable: true
+                },
+                {
+                    field: 'endTime',
+                    title: '结束时间',
+                    sortable: true
+                },
+                {
+                    field: 'status',
+                    title: '是否上线',
+                    formatter: function (value, row, index) {
+                        if (value == 0) {
+                            return '<a class="btn btn-danger btn-xs " href="#" onclick="start(\'' + row.id + '\')"><i class="fa fa-close"></i>否</a> ';
+                        }
+                        if (value == 1) {
+                            return '<a class="btn btn-success btn-xs" href="#" onclick="stop(\'' + row.id + '\')"><i class="fa fa-check"></i>是</a> ';
+
+                        }
+                    },
+                    sortable: true
+                },
+                {
+                    field: 'clickCount',
+                    title: '点击数',
+                    sortable: true
+                },
+                {
+                    field: 'orderCount',
+                    title: '下单数',
+                    sortable: true
+                },
+                {
+                    field: 'url',
+                    title: '链接地址',
+                    sortable: true
+                },
+                {
+                    field: 'note',
+                    title: '备注',
+                    sortable: true
+                },
+                {
+                    field: 'sort',
+                    title: '排序',
+                    sortable: true
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+        };
+        $.table.init(options);
+    });
+    /*调度任务-停用*/
+    function stop(id) {
+        $.modal.confirm("确认要下线吗？", function() {
+            $.operate.post(prefix + "/status", { "id": id, "status": 1 });
+        })
+    }
+
+    /*调度任务-启用*/
+    function start(id) {
+        $.modal.confirm("确认要上线吗？", function() {
+            $.operate.post(prefix + "/status", { "id": id, "status": 0 });
+        })
+    }
+</script>
+</body>
+</html>

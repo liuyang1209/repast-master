@@ -274,5 +274,14 @@ public class ProductCategoryServiceImpl implements IProductCategoryService
 }
 		return false;
 	}
-
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/6 21:50
+	 * @Description
+	 * 查询二级类目
+	 */
+	@Override
+	public  List<ProductCategory> selectTwoProduct(){
+		return productCategoryMapper.selectTwoProduct();
+	}
 }

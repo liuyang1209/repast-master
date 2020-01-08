@@ -2,6 +2,7 @@ package com.aaa.repast.admin.project.system.productAttribute.mapper;
 
 import com.aaa.repast.admin.project.system.productAttribute.domain.ProductAttribute;
 import com.aaa.repast.admin.project.system.productAttributeCategory.domain.ProductAttributeCategory;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @author Seven Lee
  * @date 2020-01-02
  */
+@Repository
 public interface ProductAttributeMapper 
 {
 	/**
@@ -63,6 +65,16 @@ public interface ProductAttributeMapper
 
 
 	public List<ProductAttributeCategory> selectCategoryName();
+
+
+	// 刘扬
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/7 13:21
+	 * @Description
+	 * 	查询类型 查询属性
+	 */
+	public List<ProductAttribute> selectAttributeByType(Integer type);
 
 	
 }

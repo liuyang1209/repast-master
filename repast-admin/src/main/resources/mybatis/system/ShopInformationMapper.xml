@@ -156,5 +156,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
-    
+        <!--查询店铺的id 和名字-->
+    <select id="getShopinformation" resultMap="ShopInformationResult">
+        select id,name from ums_shop_information
+    </select>
+
+
+    <!--董彤彤-->
+    <select id="selectShopInformationName"  resultMap="ShopInformationResult">
+    select id,name from ums_shop_information
+    </select>
+
 </mapper>

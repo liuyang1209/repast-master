@@ -5,32 +5,42 @@
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
         <form class="form-horizontal m" id="form-product-add" method="post" enctype="multipart/form-data">
+			<!---->
+			<!--<li>
+                名字：<input type="file" name="file"/>
+            </li>-->
+
 			<div class="form-group">
-				<!---->
-				<li>
-					名字：<input type="file" name="file"/>
-				</li>
-				<label class="col-sm-3 control-label">店铺ID：</label>
+				<label class="col-sm-3 control-label">选择店铺：</label>
 				<div class="col-sm-8">
-					<input id="shopId" name="shopId" class="form-control" type="text">
+					<select id="shopId" class="form-control" name="shopId" style="display: none">
+						</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">选择品牌：</label>
+				<div class="col-sm-8">
+					<select id="brandId" class="form-control" name="brandId">
+
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">选择类别：</label>
+				<div class="col-sm-8">
+					<select id="productCategoryId" class="form-control" name="productCategoryId">
+
+					</select>
 				</div>
 			</div>
 			<div class="form-group">	
-				<label class="col-sm-3 control-label">品牌ID：</label>
+
+				<label class="col-sm-3 control-label">产品属性类别：</label>
 				<div class="col-sm-8">
-					<input id="brandId" name="brandId" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">产品类别ID：</label>
-				<div class="col-sm-8">
-					<input id="productCategoryId" name="productCategoryId" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">产品属性类别ID：</label>
-				<div class="col-sm-8">
-					<input id="productAttributeCategoryId" name="productAttributeCategoryId" class="form-control" type="text">
+					<select id="productAttributeCategoryId" class="form-control" name="productAttributeCategoryId">
+
+					</select>
 				</div>
 			</div>
 			<div class="form-group">	
@@ -42,7 +52,7 @@
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">图片路径：</label>
 				<div class="col-sm-8">
-					<input id="pic" name="pic" class="form-control" type="text">
+					<input id="file" name="file" class="form-control" type="file">
 				</div>
 			</div>
 			<div class="form-group">	
@@ -51,28 +61,35 @@
 					<input id="productSn" name="productSn" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
+			<!--<div class="form-group">
 				<label class="col-sm-3 control-label">删除状态：0->未删除；1->已删除：</label>
 				<div class="col-sm-8">
 					<input id="deleteStatus" name="deleteStatus" class="form-control" type="text">
 				</div>
-			</div>
-			<div class="form-group">	
+			</div>-->
+		<!--	<div class="form-group">
 				<label class="col-sm-3 control-label">上架状态：0->下架；1->上架：</label>
 				<div class="col-sm-8">
 					<input id="publishStatus" name="publishStatus" class="form-control" type="text">
 				</div>
-			</div>
+			</div>-->
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">新品状态:0->不是新品；1->新品：</label>
 				<div class="col-sm-8">
-					<input id="newStatus" name="newStatus" class="form-control" type="text">
+					<select id="newStatus" class="form-control" name="newStatus">
+						<option value="0">不是新品</option>
+						<option value="1">新品</option>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">推荐状态；0->不推荐；1->推荐：</label>
 				<div class="col-sm-8">
-					<input id="recommandStatus" name="recommandStatus" class="form-control" type="text">
+
+					<select id="recommandStatus" class="form-control" name="recommandStatus">
+						<option value="0">不推荐</option>
+						<option value="1">推荐</option>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">	
@@ -93,7 +110,7 @@
 					<input id="price" name="price" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
+		<!--	<div class="form-group">
 				<label class="col-sm-3 control-label">促销价格：</label>
 				<div class="col-sm-8">
 					<input id="promotionPrice" name="promotionPrice" class="form-control" type="text">
@@ -104,7 +121,7 @@
 				<div class="col-sm-8">
 					<input id="giftPoint" name="giftPoint" class="form-control" type="text">
 				</div>
-			</div>
+			</div>-->
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">副标题：</label>
 				<div class="col-sm-8">
@@ -135,13 +152,23 @@
 					<input id="lowStock" name="lowStock" class="form-control" type="text">
 				</div>
 			</div>
+
+
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">单位：</label>
 				<div class="col-sm-8">
-					<input id="unit" name="unit" class="form-control" type="text">
+                    <select  id="dianWei" class="form-control" style="width: 200px">
+                        <option>请选择</option>
+                        <option value="0">规格</option>
+                        <option value="1">参数</option>
+                    </select>
+                    <select id="unit" class="form-control" name="unit"style="width: 200px">
+                    </select>
 				</div>
 			</div>
-			<div class="form-group">	
+
+
+			<div class="form-group">
 				<label class="col-sm-3 control-label">商品重量，默认为克：</label>
 				<div class="col-sm-8">
 					<input id="weight" name="weight" class="form-control" type="text">
@@ -150,7 +177,11 @@
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮：</label>
 				<div class="col-sm-8">
-					<input id="serviceIds" name="serviceIds" class="form-control" type="text">
+					<select id="serviceIds"  multiple="multiple" class="form-control" name="serviceIds"style="width: 200px">
+						<option value="1">无忧退货</option>
+						<option value="2">快速退款</option>
+						<option value="3">免费包邮</option>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">	
@@ -165,12 +196,12 @@
 					<input id="note" name="note" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
+			<!--<div class="form-group">
 				<label class="col-sm-3 control-label">画册id：</label>
 				<div class="col-sm-8">
 					<input id="albumId" name="albumId" class="form-control" type="text">
 				</div>
-			</div>
+			</div>-->
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">详细标题：</label>
 				<div class="col-sm-8">
@@ -195,7 +226,7 @@
 					<input id="detailMobileHtml" name="detailMobileHtml" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
+		<!--	<div class="form-group">
 				<label class="col-sm-3 control-label">促销开始时间：</label>
 				<div class="col-sm-8">
 					<input id="promotionStartTime" name="promotionStartTime" class="form-control" type="text">
@@ -230,40 +261,94 @@
 				<div class="col-sm-8">
 					<input id="productCategoryName" name="productCategoryName" class="form-control" type="text">
 				</div>
-			</div>
+			</div>-->
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">币种，0-> 人民币;  1-> 积分：</label>
 				<div class="col-sm-8">
-					<input id="currency" name="currency" class="form-control" type="text">
+
+					<select id="currency"  class="form-control" name="currency"style="width: 200px">
+						<option value="0">人民币</option>
+						<option value="1">积分</option>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">霸王餐0-->参加,1-->不参加：</label>
 				<div class="col-sm-8">
-					<input id="free" name="free" class="form-control" type="text">
+					<select id="free"  class="form-control" name="free"style="width: 200px">
+						<option value="0">参加</option>
+						<option value="1">不参加</option>
+
+					</select>
 				</div>
 			</div>
 		</form>
 	</div>
     <div th:include="include::footer"></div>
     <script type="text/javascript">
+		var prefix = ctx + "system/product"
 		//查询所有的店铺信息
 		$(function () {
-			$.get("",function (data) {
-				
-			})
+			$.get(prefix+"/selectProduct",function (data) {
+				console.info(data);
+				var sel = $("#shopId");
+				sel.empty();
+				for (var index in data) {
+					var position = data[index];
+					sel.append("<option value=" + position.id + ">" + position.name + "</option>");
+				}
+			},"json")
 
 			// 查询所有品牌信息
-
+			$.get(prefix+"/selectBrand",function (data) {
+				console.info(data);
+				var sel = $("#brandId");
+				sel.empty();
+				for (var index in data) {
+					var position = data[index];
+					sel.append("<option value=" + position.id + ">" + position.name + "</option>");
+				}
+			},"json")
 			// 查询种类信息
+			$.get(prefix+"/selectProductCategory",function (data) {
+				console.info(data);
+				var sel = $("#productCategoryId");
+				sel.empty();
+				for (var index in data) {
+					var position = data[index];
+					sel.append("<option value=" + position.id + ">" + position.name + "</option>");
+				}
+			},"json")
+
 			// 查询所所有产品属性类别
+			$.get(prefix+"/selectProductAttributeCategory",function (data) {
+				console.info(data);
+				var sel = $("#productAttributeCategoryId");
+				sel.empty();
+				for (var index in data) {
+					var position = data[index];
+					sel.append("<option value=" + position.id + ">" + position.name + "</option>");
+				}
+			},"json")
 
 
 		})
+		//二级联动 根据商品的类型查询商品的属性
+			$("#dianWei").change(function () {
+				var type = $("#dianWei option:selected").val();
+				$.post(prefix+"/selectAttributeByType",{type:type},function (data) {
+					var sel = $("#unit");
+					sel.empty();
+					for (var index in data) {
+						var position = data[index];
+						sel.append("<option value=" + position.id + ">" + position.name + "</option>");
+					}
+				},"json")
+
+			})
 
 
 
-		var prefix = ctx + "system/product"
 		$("#form-product-add").validate({
 			rules:{
 				xxxx:{
@@ -284,9 +369,12 @@
 				contentType : false,
 				processData : false,
 				success:function(data) {
-				}
+					console.info(data);
+					$.operate.successCallback(data);
 
+				}
 			});
+
 	    }
 	</script>
 </body>

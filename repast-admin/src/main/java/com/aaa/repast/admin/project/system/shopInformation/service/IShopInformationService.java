@@ -50,5 +50,20 @@ public interface IShopInformationService
      * @return 结果
      */
 	public int deleteShopInformationByIds(String ids);
+	// 刘扬写的代码：
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/6 20:23
+	 * @Description
+	 * 查询所有的店铺
+	 */
+	 List<ShopInformation> getShopinformation();
+
+	 //董彤彤
+	/**
+	 * 查询店铺的名称信息
+	 * @return 店铺的名称信息
+	 */
+	public List<ShopInformation> selectShopInformationName();
 	
 }

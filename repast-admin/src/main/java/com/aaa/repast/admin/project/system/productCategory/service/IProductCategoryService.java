@@ -93,4 +93,11 @@ public interface IProductCategoryService
 	 *  添加二级类目
 	 */
 	public Boolean twoProinfo(ProductCategory productCategory,MultipartFile file);
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/6 21:50
+	 * @Description
+	 * 查询二级类目
+	 */
+	public  List<ProductCategory> selectTwoProduct();
 }

@@ -91,5 +91,15 @@ public class ProductAttributeCategoryServiceImpl implements IProductAttributeCat
 		List<ProductAttribute> selectShuXing = productAttributeCategoryMapper.selectShuXing(id);
 		return selectShuXing;
 	}
-
+	// 刘扬
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/6 22:06
+	 * @Description
+	 *  查询商品属性id 和名字
+	 */
+	@Override
+	public  List<ProductAttributeCategory> selectProductAttribute(){
+		return productAttributeCategoryMapper.selectProductAttribute();
+	}
 }

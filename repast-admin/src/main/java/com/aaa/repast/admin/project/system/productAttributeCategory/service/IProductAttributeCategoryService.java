@@ -66,4 +66,13 @@ public interface IProductAttributeCategoryService
 	 * @return
 	 */
 	public List<ProductAttribute> selectShuXing(Long id);
+
+	// 刘扬
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/6 22:06
+	 * @Description
+	 *  查询商品属性id 和名字
+	 */
+	public  List<ProductAttributeCategory> selectProductAttribute();
 }

@@ -2,7 +2,9 @@ package com.aaa.repast.admin.project.system.productAttributeCategory.mapper;
 
 import com.aaa.repast.admin.project.system.productAttribute.domain.ProductAttribute;
 import com.aaa.repast.admin.project.system.productAttributeCategory.domain.ProductAttributeCategory;
-import java.util.List;	
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * 产品属性分类 数据层
@@ -10,6 +12,7 @@ import java.util.List;
  * @author Seven Lee
  * @date 2019-12-30
  */
+@Repository
 public interface ProductAttributeCategoryMapper 
 {
 	/**
@@ -74,5 +77,14 @@ public interface ProductAttributeCategoryMapper
 	 * @return
 	 */
 	public List<ProductAttribute> selectShuXing(Long id);
+
+	// 刘扬
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/6 22:06
+	 * @Description
+	 *  查询商品属性id 和名字
+	 */
+	public  List<ProductAttributeCategory> selectProductAttribute();
 
 }

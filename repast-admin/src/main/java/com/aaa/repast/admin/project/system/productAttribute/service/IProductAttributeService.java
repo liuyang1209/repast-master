@@ -54,5 +54,15 @@ public interface IProductAttributeService
 	public int deleteProductAttributeByIds(String ids);
 
 	public List<ProductAttributeCategory> selectCategoryName();
+
+
+	// 刘扬
+	/**
+	 * @Author Yang
+	 * @Date Create in  2020/1/7 13:21
+	 * @Description
+	 * 	查询类型 查询属性
+	 */
+	public List<ProductAttribute> selectAttributeByType(Integer type);
 	
 }

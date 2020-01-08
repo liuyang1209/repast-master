@@ -115,6 +115,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectCategoryName" parameterType="Long" resultType="com.aaa.repast.admin.project.system.productAttribute.vo.ProductAttributeVo">
         select name from pms_product_attribute_category
     </select>
-
-    
+    <!--刘扬-->
+    <!--查询类型 查询属性-->
+    <select id="selectAttributeByType" resultMap="ProductAttributeResult">
+        select id,name from pms_product_attribute where type=#{type}
+    </select>
 </mapper>

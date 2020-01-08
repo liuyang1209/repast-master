@@ -128,5 +128,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
-    
+    <!--刘扬：-->
+    <!--查询id 和名字-->
+    <select id="selectBrand" resultMap="BrandResult">
+        select id,name from pms_brand
+
+    </select>
 </mapper>
