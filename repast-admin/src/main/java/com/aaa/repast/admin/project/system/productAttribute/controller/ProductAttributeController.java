@@ -134,5 +134,17 @@ public class ProductAttributeController extends BaseController
 		return productAttributeCategories;
 	}
 
-	
+	@PostMapping("/updateCategory")
+	@ResponseBody
+	public int updateCategory(Long productAttributeCategoryId){
+		int updateCategory = productAttributeService.updateCategory(productAttributeCategoryId);
+		return updateCategory;
+	}
+
+	@PostMapping("/updateShuxing")
+	@ResponseBody
+	public int updateShuxing(Long productAttributeCategoryId){
+		int updateShuxing = productAttributeService.updateCategory(productAttributeCategoryId);
+		return updateShuxing;
+	}
 }

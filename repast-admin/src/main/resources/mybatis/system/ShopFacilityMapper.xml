@@ -71,5 +71,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <update id="getIcon">
+        update ums_shop_facility set icon =#{icon} where id=#{id}
+    </update>
+
+    <insert id="returnId">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into  ums_shop_facility (id,shop_id,title,description,icon)
+        values (null,#{shopId},#{title},#{description},#{icon})
+    </insert>
     
 </mapper>

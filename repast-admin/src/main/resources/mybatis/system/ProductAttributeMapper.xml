@@ -18,6 +18,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="relatedStatus"    column="related_status"    />
         <result property="handAddStatus"    column="hand_add_status"    />
         <result property="type"    column="type"    />
+
+        <result property="attributeCount"    column="attribute_count"    />
+        <result property="paramCount"    column="param_count"    />
+        <result property="state"    column="state"    />
     </resultMap>
 	
 	<sql id="selectProductAttributeVo">
@@ -115,9 +119,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectCategoryName" parameterType="Long" resultType="com.aaa.repast.admin.project.system.productAttribute.vo.ProductAttributeVo">
         select name from pms_product_attribute_category
     </select>
+
+    <update id="updateCategory" parameterType="ProductAttributeVo">
+        UPDATE pms_product_attribute_category a
+        set
+        a.attribute_count= (SELECT count(*) FROM pms_product_attribute where
+        type=0
+        AND product_attribute_category_id=#{productAttributeCategoryId})
+        where a.id=#{productAttributeCategoryId}
+    </update>
+
+    <update id="updateShuxing" parameterType="ProductAttributeVo">
+        UPDATE pms_product_attribute_category a
+        set
+        a.attribute_count= (SELECT count(*) FROM pms_product_attribute where
+        type=1
+        AND product_attribute_category_id=#{productAttributeCategoryId})
+        where a.id=#{productAttributeCategoryId}
+    </update>
+
     <!--刘扬-->
     <!--查询类型 查询属性-->
     <select id="selectAttributeByType" resultMap="ProductAttributeResult">
-        select id,name from pms_product_attribute where type=#{type}
+    select id,name from pms_product_attribute where type=#{type}
     </select>
+    
 </mapper>

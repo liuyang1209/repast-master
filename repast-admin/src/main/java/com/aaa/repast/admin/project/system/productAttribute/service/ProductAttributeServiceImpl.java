@@ -80,12 +80,37 @@ public class ProductAttributeServiceImpl implements IProductAttributeService
 		return productAttributeMapper.deleteProductAttributeByIds(Convert.toStrArray(ids));
 	}
 
+	/**
+	 * 查看属性名
+	 * @return
+	 */
 	@Override
 	public List<ProductAttributeCategory> selectCategoryName() {
 		List<ProductAttributeCategory> productAttributeCategories = productAttributeMapper.selectCategoryName();
 		return productAttributeCategories;
 	}
 
+	/**
+	 * 根据属性id改变规格数量
+	 * @param productAttributeCategoryId
+	 * @return
+	 */
+	@Override
+	public int updateCategory(Long productAttributeCategoryId) {
+		int updateCategorys = productAttributeMapper.updateCategory(productAttributeCategoryId);
+		return updateCategorys;
+	}
+
+	/**
+	 * 根据属性id改变属性数量
+	 * @param productAttributeCategoryId
+	 * @return
+	 */
+	@Override
+	public int updateShuxing(Long productAttributeCategoryId) {
+		int updateShuxing = productAttributeMapper.updateCategory(productAttributeCategoryId);
+		return updateShuxing;
+	}
 
 	// 刘扬
 	/**
@@ -98,4 +123,5 @@ public class ProductAttributeServiceImpl implements IProductAttributeService
 	public List<ProductAttribute> selectAttributeByType(Integer type){
 		return productAttributeMapper.selectAttributeByType(type);
 	}
+
 }

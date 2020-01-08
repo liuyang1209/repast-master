@@ -1,7 +1,9 @@
 package com.aaa.repast.admin.project.system.shopFacility.mapper;
 
 import com.aaa.repast.admin.project.system.shopFacility.domain.ShopFacility;
-import java.util.List;	
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 店铺的基础设置，例如：Wi-Fi，纸巾，停车位，包厢等 数据层
@@ -58,5 +60,22 @@ public interface ShopFacilityMapper
      * @return 结果
      */
 	public int deleteShopFacilityByIds(String[] ids);
+
+
+	/**
+	 * 根据店铺id 添加或修改 图片路径
+	 * @param icon
+	 * @param id
+	 * @return
+	 */
+	Integer getIcon(@Param("icon") String icon, @Param("id") Long id);
+
+	/**
+	 * 添加店铺 并返回对应主键id
+	 * @param shopFacility
+	 * @return
+	 */
+	public Long returnId(ShopFacility shopFacility);
+
 	
 }

@@ -9,7 +9,7 @@ import java.util.Date;
  * 店铺的基本表 ums_shop_information
  * 
  * @author Seven Lee
- * @date 2020-01-06
+ * @date 2020-01-03
  */
 public class ShopInformation extends BaseEntity
 {
@@ -29,9 +29,9 @@ public class ShopInformation extends BaseEntity
 	private String borough;
 	/** 地址 */
 	private String address;
-	/** 液化天然气 */
+	/**  */
 	private String lng;
-	/** 货币 */
+	/**  */
 	private String lat;
 	/** 是否打烊（手动打烊标示）和营业时间一起使用 */
 	private Integer closed;

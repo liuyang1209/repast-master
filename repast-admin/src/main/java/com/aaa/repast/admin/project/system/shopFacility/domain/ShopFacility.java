@@ -71,7 +71,8 @@ public class ShopFacility extends BaseEntity
 		return icon;
 	}
 
-    public String toString() {
+    @Override
+	public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
             .append("shopId", getShopId())

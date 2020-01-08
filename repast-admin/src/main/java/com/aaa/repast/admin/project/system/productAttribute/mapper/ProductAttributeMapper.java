@@ -2,7 +2,6 @@ package com.aaa.repast.admin.project.system.productAttribute.mapper;
 
 import com.aaa.repast.admin.project.system.productAttribute.domain.ProductAttribute;
 import com.aaa.repast.admin.project.system.productAttributeCategory.domain.ProductAttributeCategory;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,7 +11,6 @@ import java.util.List;
  * @author Seven Lee
  * @date 2020-01-02
  */
-@Repository
 public interface ProductAttributeMapper 
 {
 	/**
@@ -64,7 +62,26 @@ public interface ProductAttributeMapper
 	public int deleteProductAttributeByIds(String[] ids);
 
 
+	/**
+	 * 查看属性名
+	 * @return
+	 */
 	public List<ProductAttributeCategory> selectCategoryName();
+
+
+	/**
+	 * 根据属性id改变规格的数量
+	 * @param productAttributeCategoryId
+	 * @return
+	 */
+	public int updateCategory(Long productAttributeCategoryId);
+
+	/**
+	 * 根据属性id改变属性的数量
+	 * @param productAttributeCategoryId
+	 * @return
+	 */
+	public int updateShuxing(Long productAttributeCategoryId);
 
 
 	// 刘扬
@@ -75,6 +92,5 @@ public interface ProductAttributeMapper
 	 * 	查询类型 查询属性
 	 */
 	public List<ProductAttribute> selectAttributeByType(Integer type);
-
 	
 }

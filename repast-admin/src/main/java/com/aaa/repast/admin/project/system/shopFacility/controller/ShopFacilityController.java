@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aaa.repast.admin.project.system.shopFacility.domain.ShopFacility;
 import com.aaa.repast.admin.project.system.shopFacility.service.IShopFacilityService;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 店铺的基础设置，例如：Wi-Fi，纸巾，停车位，包厢等 信息操作处理
@@ -86,7 +87,7 @@ public class ShopFacilityController extends BaseController
 	@PostMapping("/add")
 	@ResponseBody
 	public AjaxResult addSave(ShopFacility shopFacility)
-	{		
+	{
 		return toAjax(shopFacilityService.insertShopFacility(shopFacility));
 	}
 
@@ -123,6 +124,18 @@ public class ShopFacilityController extends BaseController
 	public AjaxResult remove(String ids)
 	{		
 		return toAjax(shopFacilityService.deleteShopFacilityByIds(ids));
+	}
+
+	@RequiresPermissions("system:productCategory:adds")
+	@Log(title = "产品分类", businessType = BusinessType.INSERT)
+	@PostMapping("/adds")
+	@ResponseBody
+	public AjaxResult addSaves(ShopFacility shopFacility, MultipartFile file) {
+		Boolean b = shopFacilityService.addProductCategory(shopFacility, file);
+		if(b){
+			return success();
+		}
+		return error();
 	}
 	
 }

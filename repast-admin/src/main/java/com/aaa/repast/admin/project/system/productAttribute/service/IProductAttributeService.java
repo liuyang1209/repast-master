@@ -53,8 +53,25 @@ public interface IProductAttributeService
      */
 	public int deleteProductAttributeByIds(String ids);
 
+	/**
+	 * 查看属性名
+	 * @return
+	 */
 	public List<ProductAttributeCategory> selectCategoryName();
 
+	/**
+	 * 根据属性id改变规格数量
+	 * @param productAttributeCategoryId
+	 * @return
+	 */
+	public int updateCategory(Long productAttributeCategoryId);
+
+	/**
+	 * 根据属性id改变属性数量
+	 * @param productAttributeCategoryId
+	 * @return
+	 */
+	public int updateShuxing(Long productAttributeCategoryId);
 
 	// 刘扬
 	/**
@@ -64,5 +81,5 @@ public interface IProductAttributeService
 	 * 	查询类型 查询属性
 	 */
 	public List<ProductAttribute> selectAttributeByType(Integer type);
-	
+
 }

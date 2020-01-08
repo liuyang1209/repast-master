@@ -15,7 +15,7 @@
 				<div class="form-group">
 					<label class="col-sm-3 control-label">产品属性分类id：</label>
 					<div class="col-sm-9">
-						<select class="form-control" name="productAttributeCategoryId"></select>
+						<input type="text" class="form-control" name="productAttributeCategoryId">
 					</div>
 				</div>
 				<div class="form-group">
@@ -152,8 +152,15 @@
 		function submitHandler() {
 	        if ($.validate.form()) {
 	            $.operate.save(prefix + "/add", $('#form-productAttribute-add').serialize());
+	            //updateCategory($('#form-productAttribute-add').productAttributeCategoryId)
+
 	        }
 	    }
+
+	    function updateCategory(productAttributeCategoryId) {
+			$.post(prefix+"/updateCategory",{productAttributeCategoryId:productAttributeCategoryId},function (data) {
+			},"json");
+		}
 	</script>
 </body>
 </html>

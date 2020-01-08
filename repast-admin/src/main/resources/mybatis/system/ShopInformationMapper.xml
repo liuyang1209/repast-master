@@ -1,123 +1,126 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aaa.repast.admin.project.system.shopInformation.mapper.ShopInformationMapper">
-    
+
     <resultMap type="ShopInformation" id="ShopInformationResult">
-        <result property="id"    column="id"    />
-        <result property="ownerId"    column="owner_id"    />
-        <result property="name"    column="name"    />
-        <result property="province"    column="province"    />
-        <result property="city"    column="city"    />
-        <result property="borough"    column="borough"    />
-        <result property="address"    column="address"    />
-        <result property="lng"    column="lng"    />
-        <result property="lat"    column="lat"    />
-        <result property="closed"    column="closed"    />
-        <result property="openTime"    column="open_time"    />
-        <result property="phone"    column="phone"    />
-        <result property="images"    column="images"    />
-        <result property="status"    column="status"    />
-        <result property="authStartTime"    column="auth_start_time"    />
-        <result property="authLong"    column="auth_long"    />
-        <result property="templateId"    column="template_id"    />
-        <result property="businessLicense"    column="business_license"    />
-        <result property="foodLicense"    column="food_license"    />
-        <result property="sanitationLicense"    column="sanitation_license"    />
-        <result property="assess"    column="assess"    />
-        <result property="contractId"    column="contract_id"    />
+        <result property="id" column="id"/>
+        <result property="ownerId" column="owner_id"/>
+        <result property="name" column="name"/>
+        <result property="province" column="province"/>
+        <result property="city" column="city"/>
+        <result property="borough" column="borough"/>
+        <result property="address" column="address"/>
+        <result property="lng" column="lng"/>
+        <result property="lat" column="lat"/>
+        <result property="closed" column="closed"/>
+        <result property="openTime" column="open_time"/>
+        <result property="phone" column="phone"/>
+        <result property="images" column="images"/>
+        <result property="status" column="status"/>
+        <result property="authStartTime" column="auth_start_time"/>
+        <result property="authLong" column="auth_long"/>
+        <result property="templateId" column="template_id"/>
+        <result property="businessLicense" column="business_license"/>
+        <result property="foodLicense" column="food_license"/>
+        <result property="sanitationLicense" column="sanitation_license"/>
+        <result property="assess" column="assess"/>
+        <result property="contractId" column="contract_id"/>
     </resultMap>
-	
-	<sql id="selectShopInformationVo">
+
+    <sql id="selectShopInformationVo">
         select id, owner_id, name, province, city, borough, address, lng, lat, closed, open_time, phone, images, status, auth_start_time, auth_long, template_id, business_license, food_license, sanitation_license, assess, contract_id from ums_shop_information
     </sql>
-	
+
     <select id="selectShopInformationList" parameterType="ShopInformation" resultMap="ShopInformationResult">
         <include refid="selectShopInformationVo"/>
-        <where>  
-            <if test="id != null "> and id = #{id}</if>
-             <if test="ownerId != null "> and owner_id = #{ownerId}</if>
-             <if test="name != null  and name != '' "> and name = #{name}</if>
-             <if test="province != null  and province != '' "> and province = #{province}</if>
-             <if test="city != null  and city != '' "> and city = #{city}</if>
-             <if test="borough != null  and borough != '' "> and borough = #{borough}</if>
-             <if test="address != null  and address != '' "> and address = #{address}</if>
-             <if test="lng != null  and lng != '' "> and lng = #{lng}</if>
-             <if test="lat != null  and lat != '' "> and lat = #{lat}</if>
-             <if test="closed != null "> and closed = #{closed}</if>
-             <if test="openTime != null  and openTime != '' "> and open_time = #{openTime}</if>
-             <if test="phone != null  and phone != '' "> and phone = #{phone}</if>
-             <if test="images != null  and images != '' "> and images = #{images}</if>
-             <if test="status != null "> and status = #{status}</if>
-             <if test="authStartTime != null "> and auth_start_time = #{authStartTime}</if>
-             <if test="authLong != null "> and auth_long = #{authLong}</if>
-             <if test="templateId != null "> and template_id = #{templateId}</if>
-             <if test="businessLicense != null  and businessLicense != '' "> and business_license = #{businessLicense}</if>
-             <if test="foodLicense != null  and foodLicense != '' "> and food_license = #{foodLicense}</if>
-             <if test="sanitationLicense != null  and sanitationLicense != '' "> and sanitation_license = #{sanitationLicense}</if>
-             <if test="assess != null  and assess != '' "> and assess = #{assess}</if>
-             <if test="contractId != null "> and contract_id = #{contractId}</if>
-         </where>
+        <where>
+            <if test="id != null ">and id = #{id}</if>
+            <if test="ownerId != null ">and owner_id = #{ownerId}</if>
+            <if test="name != null  and name != '' ">and name = #{name}</if>
+            <if test="province != null  and province != '' ">and province = #{province}</if>
+            <if test="city != null  and city != '' ">and city = #{city}</if>
+            <if test="borough != null  and borough != '' ">and borough = #{borough}</if>
+            <if test="address != null  and address != '' ">and address = #{address}</if>
+            <if test="lng != null  and lng != '' ">and lng = #{lng}</if>
+            <if test="lat != null  and lat != '' ">and lat = #{lat}</if>
+            <if test="closed != null ">and closed = #{closed}</if>
+            <if test="openTime != null  and openTime != '' ">and open_time = #{openTime}</if>
+            <if test="phone != null  and phone != '' ">and phone = #{phone}</if>
+            <if test="images != null  and images != '' ">and images = #{images}</if>
+            <if test="status != null ">and status = #{status}</if>
+            <if test="authStartTime != null ">and auth_start_time = #{authStartTime}</if>
+            <if test="authLong != null ">and auth_long = #{authLong}</if>
+            <if test="templateId != null ">and template_id = #{templateId}</if>
+            <if test="businessLicense != null  and businessLicense != '' ">and business_license = #{businessLicense}
+            </if>
+            <if test="foodLicense != null  and foodLicense != '' ">and food_license = #{foodLicense}</if>
+            <if test="sanitationLicense != null  and sanitationLicense != '' ">and sanitation_license =
+                #{sanitationLicense}
+            </if>
+            <if test="assess != null  and assess != '' ">and assess = #{assess}</if>
+            <if test="contractId != null ">and contract_id = #{contractId}</if>
+        </where>
     </select>
-    
+
     <select id="selectShopInformationById" parameterType="Long" resultMap="ShopInformationResult">
         <include refid="selectShopInformationVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertShopInformation" parameterType="ShopInformation">
         insert into ums_shop_information
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null  ">id,</if>
-			<if test="ownerId != null  ">owner_id,</if>
-			<if test="name != null  and name != ''  ">name,</if>
-			<if test="province != null  and province != ''  ">province,</if>
-			<if test="city != null  and city != ''  ">city,</if>
-			<if test="borough != null  and borough != ''  ">borough,</if>
-			<if test="address != null  and address != ''  ">address,</if>
-			<if test="lng != null  and lng != ''  ">lng,</if>
-			<if test="lat != null  and lat != ''  ">lat,</if>
-			<if test="closed != null  ">closed,</if>
-			<if test="openTime != null  and openTime != ''  ">open_time,</if>
-			<if test="phone != null  and phone != ''  ">phone,</if>
-			<if test="images != null  and images != ''  ">images,</if>
-			<if test="status != null  ">status,</if>
-			<if test="authStartTime != null  ">auth_start_time,</if>
-			<if test="authLong != null  ">auth_long,</if>
-			<if test="templateId != null  ">template_id,</if>
-			<if test="businessLicense != null  and businessLicense != ''  ">business_license,</if>
-			<if test="foodLicense != null  and foodLicense != ''  ">food_license,</if>
-			<if test="sanitationLicense != null  and sanitationLicense != ''  ">sanitation_license,</if>
-			<if test="assess != null  and assess != ''  ">assess,</if>
-			<if test="contractId != null  ">contract_id,</if>
-         </trim>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null  ">id,</if>
+            <if test="ownerId != null  ">owner_id,</if>
+            <if test="name != null  and name != ''  ">name,</if>
+            <if test="province != null  and province != ''  ">province,</if>
+            <if test="city != null  and city != ''  ">city,</if>
+            <if test="borough != null  and borough != ''  ">borough,</if>
+            <if test="address != null  and address != ''  ">address,</if>
+            <if test="lng != null  and lng != ''  ">lng,</if>
+            <if test="lat != null  and lat != ''  ">lat,</if>
+            <if test="closed != null  ">closed,</if>
+            <if test="openTime != null  and openTime != ''  ">open_time,</if>
+            <if test="phone != null  and phone != ''  ">phone,</if>
+            <if test="images != null  and images != ''  ">images,</if>
+            <if test="status != null  ">status,</if>
+            <if test="authStartTime != null  ">auth_start_time,</if>
+            <if test="authLong != null  ">auth_long,</if>
+            <if test="templateId != null  ">template_id,</if>
+            <if test="businessLicense != null  and businessLicense != ''  ">business_license,</if>
+            <if test="foodLicense != null  and foodLicense != ''  ">food_license,</if>
+            <if test="sanitationLicense != null  and sanitationLicense != ''  ">sanitation_license,</if>
+            <if test="assess != null  and assess != ''  ">assess,</if>
+            <if test="contractId != null  ">contract_id,</if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null  ">#{id},</if>
-			<if test="ownerId != null  ">#{ownerId},</if>
-			<if test="name != null  and name != ''  ">#{name},</if>
-			<if test="province != null  and province != ''  ">#{province},</if>
-			<if test="city != null  and city != ''  ">#{city},</if>
-			<if test="borough != null  and borough != ''  ">#{borough},</if>
-			<if test="address != null  and address != ''  ">#{address},</if>
-			<if test="lng != null  and lng != ''  ">#{lng},</if>
-			<if test="lat != null  and lat != ''  ">#{lat},</if>
-			<if test="closed != null  ">#{closed},</if>
-			<if test="openTime != null  and openTime != ''  ">#{openTime},</if>
-			<if test="phone != null  and phone != ''  ">#{phone},</if>
-			<if test="images != null  and images != ''  ">#{images},</if>
-			<if test="status != null  ">#{status},</if>
-			<if test="authStartTime != null  ">#{authStartTime},</if>
-			<if test="authLong != null  ">#{authLong},</if>
-			<if test="templateId != null  ">#{templateId},</if>
-			<if test="businessLicense != null  and businessLicense != ''  ">#{businessLicense},</if>
-			<if test="foodLicense != null  and foodLicense != ''  ">#{foodLicense},</if>
-			<if test="sanitationLicense != null  and sanitationLicense != ''  ">#{sanitationLicense},</if>
-			<if test="assess != null  and assess != ''  ">#{assess},</if>
-			<if test="contractId != null  ">#{contractId},</if>
-         </trim>
+            <if test="id != null  ">#{id},</if>
+            <if test="ownerId != null  ">#{ownerId},</if>
+            <if test="name != null  and name != ''  ">#{name},</if>
+            <if test="province != null  and province != ''  ">#{province},</if>
+            <if test="city != null  and city != ''  ">#{city},</if>
+            <if test="borough != null  and borough != ''  ">#{borough},</if>
+            <if test="address != null  and address != ''  ">#{address},</if>
+            <if test="lng != null  and lng != ''  ">#{lng},</if>
+            <if test="lat != null  and lat != ''  ">#{lat},</if>
+            <if test="closed != null  ">#{closed},</if>
+            <if test="openTime != null  and openTime != ''  ">#{openTime},</if>
+            <if test="phone != null  and phone != ''  ">#{phone},</if>
+            <if test="images != null  and images != ''  ">#{images},</if>
+            <if test="status != null  ">#{status},</if>
+            <if test="authStartTime != null  ">#{authStartTime},</if>
+            <if test="authLong != null  ">#{authLong},</if>
+            <if test="templateId != null  ">#{templateId},</if>
+            <if test="businessLicense != null  and businessLicense != ''  ">#{businessLicense},</if>
+            <if test="foodLicense != null  and foodLicense != ''  ">#{foodLicense},</if>
+            <if test="sanitationLicense != null  and sanitationLicense != ''  ">#{sanitationLicense},</if>
+            <if test="assess != null  and assess != ''  ">#{assess},</if>
+            <if test="contractId != null  ">#{contractId},</if>
+        </trim>
     </insert>
-	 
+
     <update id="updateShopInformation" parameterType="ShopInformation">
         update ums_shop_information
         <trim prefix="SET" suffixOverrides=",">
@@ -139,32 +142,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="templateId != null  ">template_id = #{templateId},</if>
             <if test="businessLicense != null  and businessLicense != ''  ">business_license = #{businessLicense},</if>
             <if test="foodLicense != null  and foodLicense != ''  ">food_license = #{foodLicense},</if>
-            <if test="sanitationLicense != null  and sanitationLicense != ''  ">sanitation_license = #{sanitationLicense},</if>
+            <if test="sanitationLicense != null  and sanitationLicense != ''  ">sanitation_license =
+                #{sanitationLicense},
+            </if>
             <if test="assess != null  and assess != ''  ">assess = #{assess},</if>
             <if test="contractId != null  ">contract_id = #{contractId},</if>
         </trim>
         where id = #{id}
     </update>
 
-	<delete id="deleteShopInformationById" parameterType="Long">
+    <delete id="deleteShopInformationById" parameterType="Long">
         delete from ums_shop_information where id = #{id}
     </delete>
-	
+
     <delete id="deleteShopInformationByIds" parameterType="String">
-        delete from ums_shop_information where id in 
+        delete from ums_shop_information where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
-        <!--查询店铺的id 和名字-->
+
+
+    <select id="selectShopInformationName" resultMap="ShopInformationResult">
+          select id,name from ums_shop_information
+    </select>
+    <update id="updateClosed" parameterType="ShopInformation">
+        update  ums_shop_information set closed=#{closed} where id=#{id}
+    </update>
+
+
+    <!--刘扬-->
+    <!--查询店铺的id 和名字-->
     <select id="getShopinformation" resultMap="ShopInformationResult">
-        select id,name from ums_shop_information
+    select id,name from ums_shop_information
     </select>
 
 
     <!--董彤彤-->
-    <select id="selectShopInformationName"  resultMap="ShopInformationResult">
+    <select id="selectShopInformationNames"  resultMap="ShopInformationResult">
     select id,name from ums_shop_information
     </select>
+
 
 </mapper>

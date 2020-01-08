@@ -1,13 +1,16 @@
 package com.aaa.repast.admin.project.system.shopInformation.service;
 
 import com.aaa.repast.admin.project.system.shopInformation.domain.ShopInformation;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 /**
  * 店铺的基本 服务层
  * 
  * @author Seven Lee
- * @date 2020-01-06
+ * @date 2020-01-03
  */
 public interface IShopInformationService 
 {
@@ -33,7 +36,7 @@ public interface IShopInformationService
      * @param shopInformation 店铺的基本信息
      * @return 结果
      */
-	public int insertShopInformation(ShopInformation shopInformation);
+	public int insertShopInformation(MultipartFile[] files, ShopInformation shopInformation);
 	
 	/**
      * 修改店铺的基本
@@ -41,7 +44,7 @@ public interface IShopInformationService
      * @param shopInformation 店铺的基本信息
      * @return 结果
      */
-	public int updateShopInformation(ShopInformation shopInformation);
+	public int updateShopInformation(MultipartFile[] files, ShopInformation shopInformation);
 		
 	/**
      * 删除店铺的基本信息
@@ -50,6 +53,21 @@ public interface IShopInformationService
      * @return 结果
      */
 	public int deleteShopInformationByIds(String ids);
+	/**
+	 * 查询店铺的名称信息
+	 * @return 店铺的名称信息
+	 */
+	public List<ShopInformation> selectShopInformationName();
+	/**
+	 * 修改营业状态
+	 * @param id
+	 * @param closed
+	 * @return
+	 */
+	public int updateClosed(Long id, Integer closed);
+
+
+
 	// 刘扬写的代码：
 	/**
 	 * @Author Yang
@@ -57,13 +75,13 @@ public interface IShopInformationService
 	 * @Description
 	 * 查询所有的店铺
 	 */
-	 List<ShopInformation> getShopinformation();
+	List<ShopInformation> getShopinformation();
 
-	 //董彤彤
+	//董彤彤
 	/**
 	 * 查询店铺的名称信息
 	 * @return 店铺的名称信息
 	 */
-	public List<ShopInformation> selectShopInformationName();
-	
+	public List<ShopInformation> selectShopInformationNames();
+
 }
