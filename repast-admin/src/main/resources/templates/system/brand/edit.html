@@ -3,93 +3,118 @@
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="white-bg">
-    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-brand-edit" th:object="${brand}">
-            <input id="id" name="id" th:field="*{id}"  type="hidden">
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">店铺id：</label>
-				<div class="col-sm-8">
-					<input id="shopId" name="shopId" th:field="*{shopId}" class="form-control" type="text">
-				</div>
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+	<form class="form-horizontal m" id="form-brand-edit" th:object="${brand}">
+		<input id="id" name="id" th:field="*{id}"  type="hidden">
+		<!--			<div class="form-group">	-->
+		<!--				<label class="col-sm-3 control-label">：</label>-->
+		<!--				<div class="col-sm-8">-->
+		<!--					<input id="shopId" name="shopId" th:field="*{shopId}" class="form-control" type="text">-->
+		<!--				</div>-->
+		<!--			</div>-->
+		<div class="form-group">
+			<label class="col-sm-3 control-label">名称：</label>
+			<div class="col-sm-8">
+				<input id="name" name="name" th:field="*{name}" class="form-control" type="text">
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">名称：</label>
-				<div class="col-sm-8">
-					<input id="name" name="name" th:field="*{name}" class="form-control" type="text">
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">首字母：</label>
+			<div class="col-sm-8">
+				<input id="firstLetter" name="firstLetter" th:field="*{firstLetter}" class="form-control" type="text">
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">首字母：</label>
-				<div class="col-sm-8">
-					<input id="firstLetter" name="firstLetter" th:field="*{firstLetter}" class="form-control" type="text">
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">排序：</label>
+			<div class="col-sm-8">
+				<input id="sort" name="sort" th:field="*{sort}" class="form-control" type="text">
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">排序：</label>
-				<div class="col-sm-8">
-					<input id="sort" name="sort" th:field="*{sort}" class="form-control" type="text">
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">是否为品牌制造商：0->不是；1->是：</label>
+			<div class="col-sm-8">
+				<!--					<input id="factoryStatus" name="factoryStatus" th:field="*{factoryStatus}" class="form-control" type="text">-->
+
+				<select id="factoryStatus"  class="form-control" name="factoryStatus" th:field="*{factoryStatus}">
+					<option th:value="0">不是</option>
+					<option th:value="1">是</option>
+				</select>
+
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">是否为品牌制造商：0->不是；1->是：</label>
-				<div class="col-sm-8">
-					<input id="factoryStatus" name="factoryStatus" th:field="*{factoryStatus}" class="form-control" type="text">
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">是否显示：0->不显示；1->显示：</label>
+			<div class="col-sm-8">
+				<!--					<input id="showStatus" name="showStatus" th:field="*{showStatus}" class="form-control" type="text">-->
+
+				<select id="showStatus"  class="form-control" name="showStatus"  th:field="*{showStatus}" >
+					<option th:value="0">不显示</option>
+					<option th:value="1">显示</option>
+				</select>
+
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">是否显示：0->不显示；1->显示：</label>
-				<div class="col-sm-8">
-					<input id="showStatus" name="showStatus" th:field="*{showStatus}" class="form-control" type="text">
-				</div>
+		</div>
+		<!--			<div class="form-group">	-->
+		<!--				<label class="col-sm-3 control-label">产品数量：</label>-->
+		<!--				<div class="col-sm-8">-->
+		<!--					<input id="productCount" name="productCount" th:field="*{productCount}" class="form-control" type="text">-->
+		<!--				</div>-->
+		<!--			</div>-->
+		<!--			<div class="form-group">	-->
+		<!--				<label class="col-sm-3 control-label">产品评论数量：</label>-->
+		<!--				<div class="col-sm-8">-->
+		<!--					<input id="productCommentCount" name="productCommentCount" th:field="*{productCommentCount}" class="form-control" type="text">-->
+		<!--				</div>-->
+		<!--			</div>-->
+		<div class="form-group">
+			<label class="col-sm-3 control-label">品牌logo：</label>
+			<div class="col-sm-8">
+				<input id="logo" name="files" class="form-control" type="file">
 			</div>
-<!--			<div class="form-group">-->
-<!--				<label class="col-sm-3 control-label">产品数量：</label>-->
-<!--				<div class="col-sm-8">-->
-<!--					<input id="productCount" name="productCount" th:field="*{productCount}" class="form-control" type="text">-->
-<!--				</div>-->
-<!--			</div>-->
-<!--			<div class="form-group">-->
-<!--				<label class="col-sm-3 control-label">产品评论数量：</label>-->
-<!--				<div class="col-sm-8">-->
-<!--					<input id="productCommentCount" name="productCommentCount" th:field="*{productCommentCount}" class="form-control" type="text">-->
-<!--				</div>-->
-<!--			</div>-->
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">品牌logo：</label>
-				<div class="col-sm-8">
-					<input id="logo" name="logo" th:field="*{logo}" class="form-control" type="text">
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">专区大图：</label>
+			<div class="col-sm-8">
+				<input id="bigPic" name="files" class="form-control" type="file">
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">专区大图：</label>
-				<div class="col-sm-8">
-					<input id="bigPic" name="bigPic" th:field="*{bigPic}" class="form-control" type="text">
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">品牌故事：</label>
+			<div class="col-sm-8">
+				<input id="brandStory" name="brandStory" th:field="*{brandStory}" class="form-control" type="text">
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">品牌故事：</label>
-				<div class="col-sm-8">
-					<input id="brandStory" name="brandStory" th:field="*{brandStory}" class="form-control" type="text">
-				</div>
-			</div>
-		</form>
-    </div>
-    <div th:include="include::footer"></div>
-    <script type="text/javascript">
-		var prefix = ctx + "system/brand"
-		$("#form-brand-edit").validate({
-			rules:{
-				xxxx:{
-					required:true,
-				},
+		</div>
+	</form>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript">
+	var prefix = ctx + "system/brand"
+	$("#form-brand-edit").validate({
+		rules:{
+			xxxx:{
+				required:true,
+			},
+		}
+	});
+
+	function submitHandler() {
+		// if ($.validate.form()) {
+		//     $.operate.save(prefix + "/edit", $('#form-brand-edit').serialize());
+		// }
+
+		/*修改图片*/
+		$.ajax({
+			url: prefix + "/edit",
+			data: new FormData($("#form-brand-edit")[0]),
+			type: "post",
+			contentType: false,
+			processData: false,
+			success: function (data) {
+				$.operate.successCallback(data);
 			}
 		});
-		
-		function submitHandler() {
-	        if ($.validate.form()) {
-	            $.operate.save(prefix + "/edit", $('#form-brand-edit').serialize());
-	        }
-	    }
-	</script>
+
+	}
+</script>
 </body>
 </html>

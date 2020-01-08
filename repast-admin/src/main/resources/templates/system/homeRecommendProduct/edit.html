@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-homeRecommendProduct-edit" th:object="${homeRecommendProduct}">
+            <input id="id" name="id" th:field="*{id}"  type="hidden">
+			<div class="form-group" style="display: none">
+				<label class="col-sm-3 control-label">店铺ID：</label>
+				<div class="col-sm-8">
+					<input id="shopId" name="shopId" th:field="*{shopId}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	<!--产品ID-->
+				<label class="col-sm-3 control-label">产品名称：</label>
+				<div class="col-sm-8">
+<!--					<input id="productId" name="productId" th:field="*{productId}" class="form-control" type="text">-->
+					<select id="productId" name="productId" underline="true" class="form-control" >
+						<option value="">产品名称</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group" style="display: none">
+				<label class="col-sm-3 control-label">产品名称：</label>
+				<div class="col-sm-8">
+<!--					<input id="productName" name="productName" th:field="*{productName}" class="form-control" type="text">-->
+					<select id="regionUuid" name="productName" underline="true" class="form-control" th:field="*{productName}" >
+						<option value="">选择产品名称</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">推荐状态，1推荐，0不再推荐：</label>
+				<div class="col-sm-8">
+<!--					<input id="recommendStatus" name="recommendStatus" th:field="*{recommendStatus}" class="form-control" type="text">-->
+
+					<select id="recommendStatus" name="recommendStatus" class="form-control" th:field="*{recommendStatus}">
+						<option value="1">推荐</option>
+						<option value="0">不推荐</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">排序字段：</label>
+				<div class="col-sm-8">
+					<input id="sort" name="sort" th:field="*{sort}" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "system/homeRecommendProduct"
+		$("#form-homeRecommendProduct-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/edit", $('#form-homeRecommendProduct-edit').serialize());
+	        }
+	    }
+
+
+
+
+
+		// /*一级菜单开始、店铺id*/
+		$(function(){
+
+					$("#productId").html("");
+					var shopId = $("#shopId").val();
+					$.post(ctx +"system/homeRecommendProduct/queryshoId",{shopId:shopId},function (data){
+					var sel = $("#productId");
+						console.info(data)
+					sel.empty();
+					var positions = data;
+					for (var index in positions) {
+						var position = positions[index];
+						console.info(position)
+						sel.append("<option value=" +position.id + ">" + position.name + "</option>");
+					}
+				})
+		});
+		// /*一级菜单结束*/
+
+
+
+		/*二级菜单*/
+		$("#productId").change(function () {
+			$("#regionUuid").html("");
+			var productId = $("#productId option:selected").val();
+			$.post(ctx +"system/homeRecommendProduct/queryproductId",{productId:productId},function (data) {
+				console.info(data);
+				/*产品名字*/
+				var productId = $("#regionUuid");
+				/*产品名字清空*/
+				productId.empty();
+				var positions = data;
+				for (var index in positions) {
+					var position = positions[index];
+					console.info(position)
+					/*产品名字*/
+					productId.append("<option value=" + position.name +">" + position.name + "</option>")
+				}
+			},"json")
+		});
+		/*二级菜单结束*/
+
+
+	</script>
+</body>
+</html>

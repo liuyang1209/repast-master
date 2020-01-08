@@ -6,10 +6,10 @@
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
         <form class="form-horizontal m" id="form-brand-add">
 			<div class="form-group">	
-				<label class="col-sm-3 control-label">店铺id：</label>
-				<div class="col-sm-8">
-					<input id="shopId" name="shopId" class="form-control" type="text">
-				</div>
+<!--				<label class="col-sm-3 control-label">：</label>-->
+<!--				<div class="col-sm-8">-->
+<!--					<input id="shopId" name="shopId" class="form-control" type="text">-->
+<!--				</div>-->
 			</div>
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">名称：</label>
@@ -30,24 +30,34 @@
 				</div>
 			</div>
 			<div class="form-group">	
-				<label class="col-sm-3 control-label">是否为品牌制造商：0->不是；1->是：</label>
+				<label class="col-sm-3 control-label">是否为品牌制造商：</label>
 				<div class="col-sm-8">
-					<input id="factoryStatus" name="factoryStatus" class="form-control" type="text">
+<!--					<input id="factoryStatus" name="factoryStatus" class="form-control" type="text">-->
+
+					<select id="factoryStatus"  class="form-control" name="factoryStatus">
+						<option th:value="0">不是</option>
+						<option th:value="1">是</option>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">	
-				<label class="col-sm-3 control-label">是否显示：0->不显示；1->显示：</label>
+				<label class="col-sm-3 control-label">是否显示：</label>
 				<div class="col-sm-8">
-					<input id="showStatus" name="showStatus" class="form-control" type="text">
+<!--					<input id="showStatus" name="showStatus" class="form-control" type="text">-->
+					<select id="select_id"  class="form-control" name="showStatus">
+						<option th:value="0">不显示</option>
+						<option th:value="1">显示</option>
+					</select>
 				</div>
 			</div>
-<!--			<div class="form-group">-->
+
+<!--			<div class="form-group">	-->
 <!--				<label class="col-sm-3 control-label">产品数量：</label>-->
 <!--				<div class="col-sm-8">-->
 <!--					<input id="productCount" name="productCount" class="form-control" type="text">-->
 <!--				</div>-->
 <!--			</div>-->
-<!--			<div class="form-group">-->
+<!--			<div class="form-group">	-->
 <!--				<label class="col-sm-3 control-label">产品评论数量：</label>-->
 <!--				<div class="col-sm-8">-->
 <!--					<input id="productCommentCount" name="productCommentCount" class="form-control" type="text">-->
@@ -56,13 +66,13 @@
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">品牌logo：</label>
 				<div class="col-sm-8">
-					<input id="logo" name="logo" class="form-control" type="file">
+					<input id="logo" name="file" class="form-control" type="file">
 				</div>
 			</div>
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">专区大图：</label>
 				<div class="col-sm-8">
-					<input id="bigPic" name="bigPic" class="form-control" type="text">
+					<input id="bigPic" name="file" class="form-control" type="file">
 				</div>
 			</div>
 			<div class="form-group">	
@@ -85,10 +95,29 @@
 		});
 		
 		function submitHandler() {
-	        if ($.validate.form()) {
-	            $.operate.save(prefix + "/add", $('#form-brand-add').serialize());
-	        }
-	    }
+			// if ($.validate.form()) {
+			// 	$.operate.save(prefix + "/add", $('#form-brand-add').serialize());
+			// }
+			$.ajax({
+				url: prefix + "/add",
+				data: new FormData($("#form-brand-add")[0]),
+
+				type: "post",
+				contentType: false,
+				processData: false,
+				success: function (data) {
+					$.operate.successCallback(data);
+				}
+			});
+		}
+
+		//获取下拉框的值
+		function showStatus() {
+			var sel = document.getElementById(select_id);
+			var selected_val = sel.options[sel.selectedIndex].value;
+		}
+
+
 
 	</script>
 </body>

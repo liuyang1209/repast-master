@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-homeRecommendProduct-add">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">店铺名称：</label>
+				<div class="col-sm-8">
+					<!-- 店铺ID： <input id="shopId" name="shopId" class="form-control" type="text">-->
+					<select id="whouseUuid" name="shopId" underline="true" class="form-control">
+						<option value="">选择店铺</option>
+					</select>
+				</div>
+			</div>
+			<!--产品id-->
+<!--			<div class="form-group">-->
+<!--				<label class="col-sm-3 control-label">产品ID：</label>-->
+<!--				<div class="col-sm-8">-->
+<!--&lt;!&ndash;					<input id="productId" name="productId" class="form-control" type="text">&ndash;&gt;-->
+<!--					<select id="productId" name="productId" underline="true" class="form-control">-->
+<!--						<option value="">产品ID</option>-->
+<!--					</select>-->
+<!--				</div>-->
+<!--			</div>-->
+
+			<select id="productId" name="productId" underline="true" class="form-control" style="display: none">
+				<option value="">产品ID</option>
+			</select>
+
+			<!--产品名称-->
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">产品名称：</label>
+				<div class="col-sm-8">
+<!--					<input id="productName" name="productName" class="form-control" type="text">-->
+					<select id="regionUuid" name="productName" underline="true" class="form-control">
+						<option value="">选择产品名称</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">推荐状态，1推荐，0不再推荐：</label>
+				<div class="col-sm-8">
+<!--					<input id="recommendStatus" name="recommendStatus" class="form-control" type="text">-->
+					<select id="recommendStatus" name="recommendStatus" class="form-control">
+						<option value="1">推荐</option>
+						<option value="0">不推荐</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">排序字段：</label>
+				<div class="col-sm-8">
+					<input id="sort" name="sort" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+	</div>
+    <div th:include="include::footer"></div>
+
+
+
+    <script type="text/javascript">
+		var prefix = ctx + "system/homeRecommendProduct"
+		$("#form-homeRecommendProduct-add").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/add", $('#form-homeRecommendProduct-add').serialize());
+	        }
+	    }
+
+
+
+	    /*二级联动ajax开始*/
+		/*一级菜单开始、店铺id*/
+		$(function(){
+			$.ajax({
+				type:"POST",
+				//url:Feng.ctxPath + "/tCommonCargoLocation/queryWhun",
+				url:ctx + "system/homeRecommendProduct/queryWhun",
+				dataType: "json",
+				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+				async: false,
+				cache: false,
+				success: function (data) {
+					/*$.each(data,function(index,item){
+						console.info(item)
+						$('#whouseUuid').append(new Option(item.name));//往下拉菜单里添加元素
+					})*/
+					var sel = $("#whouseUuid");
+					sel.empty();
+					var positions = data;
+					for (var index in positions) {
+						var position = positions[index];
+						console.info(position)
+						sel.append("<option value=" + position.id + ">" + position.name + "</option>");
+					}
+				}
+
+			})
+		});
+		/*一级菜单结束*/
+
+
+
+		/*二级菜单开始、获取店铺id、产品名称*/
+		$("#whouseUuid").change(function () {
+			$("#regionUuid").html("");
+			var id = $("#whouseUuid option:selected").val();
+			$.post(ctx +"system/homeRecommendProduct/queryRegion",{id:id},function (data) {
+				console.info(data);
+				var sel = $("#regionUuid");
+				/*产品id*/
+				var productId = $("#productId");
+				sel.empty();
+				/*产品清空*/
+				productId.empty();
+				var positions = data;
+				for (var index in positions) {
+					var position = positions[index];
+					console.info(position)
+					sel.append("<option value=" + position.name +">" + position.name + "</option>");
+					/*产品id*/
+					productId.append("<option value=" + position.id +">" + position.id + "</option>")
+				}
+			},"json")
+		});
+
+		/*二级菜单结束*/
+
+		/*二级联动ajax结束*/
+
+	</script>
+
+
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
-    
+
      <div class="container-div">
 		<div class="row">
 			<div class="col-sm-12 search-collapse">
@@ -35,13 +35,13 @@
 								是否显示：0->不显示；1->显示：<input type="text" name="showStatus"/>
 							</li>
 
-							<li>
-								产品数量：<input type="text" name="productCount"/>
-							</li>
+<!--							<li>-->
+<!--								产品数量：<input type="text" name="productCount"/>-->
+<!--							</li>-->
 
-							<li>
-								产品评论数量：<input type="text" name="productCommentCount"/>
-							</li>
+<!--							<li>-->
+<!--								产品评论数量：<input type="text" name="productCommentCount"/>-->
+<!--							</li>-->
 
 							<li>
 								品牌logo：<input type="text" name="logo"/>
@@ -66,8 +66,6 @@
 			</div>
 
 
-
-			
 	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
 				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:brand:add">
 					<i class="fa fa-plus"></i> 添加
@@ -106,14 +104,14 @@
                 columns: [{
 		            checkbox: true
 		        },
+				// {
+				// 	field : 'id',
+				// 	title : 'id',
+				// 	visible: true
+				// },
 				{
-					field : 'id', 
-					title : 'id',
-					visible: true
-				},
-				{
-					//field : 'shopId',
 					field : 'shopId',
+
 					title : '店铺id',
 					sortable: true
 				},
@@ -135,30 +133,48 @@
 				{
 					field : 'factoryStatus',
 					title : '是否为品牌制造商',
+					formatter: function (value, row, index) {
+						if (value == 0) {
+							return '<a class="btn btn-danger btn-xs " href="#" onclick="start_factory(\'' + row.id + '\')"><i class="fa fa-close"></i>否</a> ';
+						}
+						if (value == 1) {
+							return '<a class="btn btn-success btn-xs" href="#" onclick="stop_factory(\'' + row.id + '\')"><i class="fa fa-check"></i>是</a> ';
+
+						}
+					},
 					sortable: true
 				},
 				{
 					field : 'showStatus',
 					title : '是否显示',
+					formatter: function (value, row, index) {
+						if (value == 0) {
+							return '<a class="btn btn-danger btn-xs " href="#" onclick="start(\'' + row.id + '\')"><i class="fa fa-close"></i>否</a> ';
+						}
+						if (value == 1) {
+							return '<a class="btn btn-success btn-xs" href="#" onclick="stop(\'' + row.id + '\')"><i class="fa fa-check"></i>是</a> ';
+
+						}
+					},
 					sortable: true
 				},
 				{
-					//field : 'productCount',
-					field : 'stock',
+
+					field : 'productCount',
 					title : '产品数量',
 					sortable: true
 				},
-				// {
-				// 	//field : 'productCommentCount',
-				// 	field : 'product_id',
-				// 	title : '产品评论数量',
-				// 	sortable: true
-				// },
+				{
+
+					field : 'productCommentCount',
+					title : '产品评论数量',
+					sortable: true
+				},
 				{
 					field : 'logo',
 					title : '品牌logo',
 					width: 80,
-					/*以下是新增的方法，用来在界面上显示图片*/
+					//用来在界面上显示图片
 					formatter: function (value, row, index) {
 						return "<img src='" + value + "' width='30' height='30'/>";
 					},
@@ -167,9 +183,9 @@
 
 
 				{
-					field : 'big_pic',
+					field : 'bigPic',
 					title : '专区大图',
-					/*以下是新增的方法，用来在界面上显示图片*/
+					//用来在界面上显示图片
 					formatter: function (value, row, index) {
 						return "<img src='" + value + "' width='30' height='30'/>";
 					},
@@ -193,6 +209,41 @@
             };
             $.table.init(options);
         });
+
+
+
+		//调度任务-停用--是否显示
+		function stop(id) {
+			$.modal.confirm("确认不显示吗？", function() {
+				$.operate.post(prefix + "/show_status", { "id": id, "show_status": 1 });
+			})
+		}
+
+		//调度任务-启用--是否显示
+		function start(id) {
+			$.modal.confirm("确认要显示吗？", function() {
+				$.operate.post(prefix + "/show_status", { "id": id, "show_status": 0 });
+			})
+		}
+
+
+
+		//调度任务-停用--是否为品牌制造商
+		function stop_factory(id) {
+			$.modal.confirm("确认不是品牌制造商吗？", function() {
+				$.operate.post(prefix + "/factory_status", { "id": id, "factory_status": 1 });
+			})
+		}
+
+		//调度任务-启用--是否为品牌制造商
+		function start_factory(id) {
+			$.modal.confirm("确认是品牌制造商吗？", function() {
+				$.operate.post(prefix + "/factory_status", { "id": id, "factory_status": 0 });
+			})
+		}
+
+
+
     </script>
 
 </body>

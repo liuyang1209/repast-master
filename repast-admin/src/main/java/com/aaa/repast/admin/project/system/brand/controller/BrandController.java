@@ -1,13 +1,14 @@
 package com.aaa.repast.admin.project.system.brand.controller;
 
 import java.util.List;
+
 import com.aaa.repast.admin.framework.aspectj.lang.annotation.Log;
 import com.aaa.repast.admin.framework.aspectj.lang.enums.BusinessType;
 import com.aaa.repast.admin.framework.poi.ExcelUtil;
 import com.aaa.repast.admin.framework.web.controller.BaseController;
 import com.aaa.repast.admin.framework.web.domain.AjaxResult;
 import com.aaa.repast.admin.framework.web.page.TableDataInfo;
-import com.aaa.repast.admin.project.system.brand.vo.BrandManagementVo;
+import com.aaa.repast.admin.project.system.brand.Vo.BrandManagementVo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aaa.repast.admin.project.system.brand.domain.Brand;
 import com.aaa.repast.admin.project.system.brand.service.IBrandService;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 品牌 信息操作处理
@@ -87,10 +89,12 @@ public class BrandController extends BaseController
 	@Log(title = "品牌", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
-	public AjaxResult addSave(Brand brand)
+	public AjaxResult addSave(MultipartFile[] file,Brand brand)
 	{		
-		return toAjax(brandService.insertBrand(brand));
+		return toAjax(brandService.insertBrand(file,brand));
 	}
+
+
 
 	/**
 	 * 修改品牌
@@ -104,15 +108,15 @@ public class BrandController extends BaseController
 	}
 	
 	/**
-	 * 修改保存品牌
+	 * 修改保存品牌、+图片修改
 	 */
 	@RequiresPermissions("system:brand:edit")
 	@Log(title = "品牌", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
-	public AjaxResult editSave(Brand brand)
+	public AjaxResult editSave(MultipartFile[] files,Brand brand)
 	{		
-		return toAjax(brandService.updateBrand(brand));
+		return toAjax(brandService.updateBrand(files,brand));
 	}
 	
 	/**
@@ -128,19 +132,72 @@ public class BrandController extends BaseController
 	}
 
 
-	/**
-	  *liyong
-	 */
 
+
+
+
+	/**
+	 * liyong
+	 *
+	 * 	查询品牌列表
+	 *
+	 */
 	@RequiresPermissions("system:brand:list")
 	@PostMapping("/list")
 	@ResponseBody
 	public TableDataInfo selectBrandAll(BrandManagementVo brandManagementVo){
-
+		//分页开始
 		startPage();
 		List<BrandManagementVo> brandManagementVosList = brandService.selectBrandAll(brandManagementVo);
 		return getDataTable(brandManagementVosList);
-
 	}
-	
+
+
+
+	/**
+	 *liyong
+	 * 		修改是否显示状态
+	 */
+	//@RequiresPermissions("system:brand:showStatus")
+	@Log(title = "品牌", businessType = BusinessType.UPDATE)
+	@PostMapping("/show_status")
+	@ResponseBody
+	public AjaxResult showStatus( Long id,Integer show_status)
+	{
+		return toAjax(brandService.showStatus(id,show_status));
+	}
+
+
+
+	/**
+	 * liyong
+	 *
+	 * 		修改是否为品牌制造商
+	 */
+	//@RequiresPermissions("system:brand:showStatus")
+	@Log(title = "品牌", businessType = BusinessType.UPDATE)
+	@PostMapping("/factory_status")
+	@ResponseBody
+	public AjaxResult factoryStatus( Long id,Integer factory_status)
+	{
+		return toAjax(brandService.factoryStatus(id,factory_status));
+	}
+
+
+
+	/**
+	 * 查询品牌列表
+	 */
+
+	@GetMapping("/brandList")
+	@ResponseBody
+	public List<BrandManagementVo> brandList(BrandManagementVo brandManagementVo)
+	{
+        List<BrandManagementVo> brandManagementVosList = brandService.selectBrandAll(brandManagementVo);
+
+        return brandManagementVosList;
+	}
+
+
+
 }

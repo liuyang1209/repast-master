@@ -1,7 +1,9 @@
 package com.aaa.repast.admin.project.system.brand.service;
 
-import com.aaa.repast.admin.project.system.brand.vo.BrandManagementVo;
 import com.aaa.repast.admin.project.system.brand.domain.Brand;
+import com.aaa.repast.admin.project.system.brand.Vo.BrandManagementVo;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 /**
@@ -34,7 +36,7 @@ public interface IBrandService
      * @param brand 品牌信息
      * @return 结果
      */
-	public int insertBrand(Brand brand);
+	public int insertBrand(MultipartFile[] file, Brand brand);
 	
 	/**
      * 修改品牌
@@ -42,7 +44,7 @@ public interface IBrandService
      * @param brand 品牌信息
      * @return 结果
      */
-	public int updateBrand(Brand brand);
+	public int updateBrand(MultipartFile[] file, Brand brand);
 		
 	/**
      * 删除品牌信息
@@ -53,14 +55,38 @@ public interface IBrandService
 	public int deleteBrandByIds(String ids);
 
 
+	/**
+	 * liyong
+	 * 	单条删除方法
+	 *
+	 */
+	/*public int deleteBrandById(Long id);*/
 
 
 	/**
-	 *liyong
+	 * liyong
+	 *
+	 * 	查询品牌列表
 	 */
 	public List<BrandManagementVo> selectBrandAll(BrandManagementVo brandManagementVo);
 
-	// 刘扬
+
+	/**
+	 * liyong
+	 * 	修改是否显示状态
+	 */
+	public int showStatus(Long id, Integer show_status);
+
+
+	/**
+	 * liyong
+	 *
+	 * 	是否为品牌制造商
+	 */
+	public int factoryStatus(Long id, Integer factory_status);
+
+
+// 刘扬
 	/**
 	 * @Author Yang
 	 * @Date Create in  2020/1/6 21:30
@@ -68,5 +94,7 @@ public interface IBrandService
 	 *  查询品牌的id 和名字
 	 */
 	public List<Brand> selectBrand();
+
+
 	
 }

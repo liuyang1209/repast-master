@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aaa.repast.admin.project.system.brand.mapper.BrandMapper">
-    
+
     <resultMap type="Brand" id="BrandResult">
         <result property="id"    column="id"    />
         <result property="shopId"    column="shop_id"    />
@@ -18,8 +18,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="bigPic"    column="big_pic"    />
         <result property="brandStory"    column="brand_story"    />
     </resultMap>
-	
-	<sql id="selectBrandVo">
+
+    <sql id="selectBrandVo">
         select id, shop_id, name, first_letter, sort, factory_status, show_status, product_count, product_comment_count, logo, big_pic, brand_story from pms_brand
     </sql>
 
@@ -43,22 +43,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>-->
 
 
-    <!--多表-->
+    <!--添加的sql语句-->
 
-    <select id="selectBrandAll" resultType="com.aaa.repast.admin.project.system.brand.vo.BrandManagementVo" resultMap="BrandResult">
-        select pb.id,pp.shop_id,pb.name,pb.first_letter,pb.sort,pb.factory_status,pb.show_status,pp.stock,pb.logo,pb.big_pic,pb.brand_story,
-			count(pc.product_id) product_id
+    <select id="selectBrandAll" resultType="com.aaa.repast.admin.project.system.brand.Vo.BrandManagementVo" resultMap="BrandResult">
+        select pb.id,pp.shop_id,pb.name,pb.first_letter,pb.sort,pb.factory_status,pb.show_status,pb.product_count,pb.product_comment_count,pb.logo,pb.big_pic,pb.brand_story
 				from pms_brand pb
 						left join pms_product pp on pb.id=pp.brand_id
 						left join pms_comment pc on pp.id=pc.product_id
-						group by pc.product_id
+						group by pb.id
     </select>
 
 
 
-
-
-    <!--查询品牌信息、搜索-->
+    <!--查询品牌信息-->
     <select id="selectBrandById" parameterType="Long" resultMap="BrandResult">
         <include refid="selectBrandVo"/>
         where id = #{id}
@@ -68,34 +65,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!--添加-->
     <insert id="insertBrand" parameterType="Brand">
         insert into pms_brand
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null  ">id,</if>
-			<if test="shopId != null  ">shop_id,</if>
-			<if test="name != null  and name != ''  ">name,</if>
-			<if test="firstLetter != null  and firstLetter != ''  ">first_letter,</if>
-			<if test="sort != null  ">sort,</if>
-			<if test="factoryStatus != null  ">factory_status,</if>
-			<if test="showStatus != null  ">show_status,</if>
-			<if test="productCount != null  ">product_count,</if>
-			<if test="productCommentCount != null  ">product_comment_count,</if>
-			<if test="logo != null  and logo != ''  ">logo,</if>
-			<if test="bigPic != null  and bigPic != ''  ">big_pic,</if>
-			<if test="brandStory != null  and brandStory != ''  ">brand_story,</if>
-         </trim>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null  ">id,</if>
+            <if test="shopId != null  ">shop_id,</if>
+            <if test="name != null  and name != ''  ">name,</if>
+            <if test="firstLetter != null  and firstLetter != ''  ">first_letter,</if>
+            <if test="sort != null  ">sort,</if>
+            <if test="factoryStatus != null  ">factory_status,</if>
+            <if test="showStatus != null  ">show_status,</if>
+            <if test="productCount != null  ">product_count,</if>
+            <if test="productCommentCount != null  ">product_comment_count,</if>
+            <if test="logo != null  and logo != ''  ">logo,</if>
+            <if test="bigPic != null  and bigPic != ''  ">big_pic,</if>
+            <if test="brandStory != null  and brandStory != ''  ">brand_story,</if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null  ">#{id},</if>
-			<if test="shopId != null  ">#{shopId},</if>
-			<if test="name != null  and name != ''  ">#{name},</if>
-			<if test="firstLetter != null  and firstLetter != ''  ">#{firstLetter},</if>
-			<if test="sort != null  ">#{sort},</if>
-			<if test="factoryStatus != null  ">#{factoryStatus},</if>
-			<if test="showStatus != null  ">#{showStatus},</if>
-			<if test="productCount != null  ">#{productCount},</if>
-			<if test="productCommentCount != null  ">#{productCommentCount},</if>
-			<if test="logo != null  and logo != ''  ">#{logo},</if>
-			<if test="bigPic != null  and bigPic != ''  ">#{bigPic},</if>
-			<if test="brandStory != null  and brandStory != ''  ">#{brandStory},</if>
-         </trim>
+            <if test="id != null  ">#{id},</if>
+            <if test="shopId != null  ">#{shopId},</if>
+            <if test="name != null  and name != ''  ">#{name},</if>
+            <if test="firstLetter != null  and firstLetter != ''  ">#{firstLetter},</if>
+            <if test="sort != null  ">#{sort},</if>
+            <if test="factoryStatus != null  ">#{factoryStatus},</if>
+            <if test="showStatus != null  ">#{showStatus},</if>
+            <if test="productCount != null  ">#{productCount},</if>
+            <if test="productCommentCount != null  ">#{productCommentCount},</if>
+            <if test="logo != null  and logo != ''  ">#{logo},</if>
+            <if test="bigPic != null  and bigPic != ''  ">#{bigPic},</if>
+            <if test="brandStory != null  and brandStory != ''  ">#{brandStory},</if>
+        </trim>
     </insert>
 
     <!--更新-->
@@ -118,20 +115,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <!--根据品牌id删除-->
-	<delete id="deleteBrandById" parameterType="Long">
+    <delete id="deleteBrandById" parameterType="Long">
         delete from pms_brand where id = #{id}
     </delete>
-	
+
     <delete id="deleteBrandByIds" parameterType="String">
-        delete from pms_brand where id in 
+        delete from pms_brand where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
+
+
+
+
+    <!--修改是否显示状态-->
+    <update id="showStatus" parameterType="Brand" >
+        update pms_brand set show_status=#{show_status} where id=#{id}
+    </update>
+
+    <!--是否为品牌制造商-->
+    <update id="factoryStatus" parameterType="Brand" >
+        update pms_brand set factory_status=#{factory_status} where id=#{id}
+    </update>
+
+
     <!--刘扬：-->
     <!--查询id 和名字-->
     <select id="selectBrand" resultMap="BrandResult">
-        select id,name from pms_brand
+    select id,name from pms_brand
 
     </select>
+
 </mapper>

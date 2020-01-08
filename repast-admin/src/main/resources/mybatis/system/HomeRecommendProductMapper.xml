@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.repast.admin.project.system.homeRecommendProduct.mapper.HomeRecommendProductMapper">
+    
+    <resultMap type="HomeRecommendProduct" id="HomeRecommendProductResult">
+        <result property="id"    column="id"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="productId"    column="product_id"    />
+        <result property="productName"    column="product_name"    />
+        <result property="recommendStatus"    column="recommend_status"    />
+        <result property="sort"    column="sort"    />
+    </resultMap>
+	
+	<sql id="selectHomeRecommendProductVo">
+        select id, shop_id, product_id, product_name, recommend_status, sort from sms_home_recommend_product
+    </sql>
+	
+    <select id="selectHomeRecommendProductList" parameterType="HomeRecommendProduct" resultMap="HomeRecommendProductResult">
+        <include refid="selectHomeRecommendProductVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="productId != null "> and product_id = #{productId}</if>
+             <if test="productName != null  and productName != '' "> and product_name = #{productName}</if>
+             <if test="recommendStatus != null "> and recommend_status = #{recommendStatus}</if>
+             <if test="sort != null "> and sort = #{sort}</if>
+         </where>
+    </select>
+    
+    <select id="selectHomeRecommendProductById" parameterType="Long" resultMap="HomeRecommendProductResult">
+        <include refid="selectHomeRecommendProductVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertHomeRecommendProduct" parameterType="HomeRecommendProduct">
+        insert into sms_home_recommend_product
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="productId != null  ">product_id,</if>
+			<if test="productName != null  and productName != ''  ">product_name,</if>
+			<if test="recommendStatus != null  ">recommend_status,</if>
+			<if test="sort != null  ">sort,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="productId != null  ">#{productId},</if>
+			<if test="productName != null  and productName != ''  ">#{productName},</if>
+			<if test="recommendStatus != null  ">#{recommendStatus},</if>
+			<if test="sort != null  ">#{sort},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateHomeRecommendProduct" parameterType="HomeRecommendProduct">
+        update sms_home_recommend_product
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="productId != null  ">product_id = #{productId},</if>
+            <if test="productName != null  and productName != ''  ">product_name = #{productName},</if>
+            <if test="recommendStatus != null  ">recommend_status = #{recommendStatus},</if>
+            <if test="sort != null  ">sort = #{sort},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteHomeRecommendProductById" parameterType="Long">
+        delete from sms_home_recommend_product where id = #{id}
+    </delete>
+	
+    <delete id="deleteHomeRecommendProductByIds" parameterType="String">
+        delete from sms_home_recommend_product where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+    
+    <!--二级联动获取店铺id。店铺表的信息-->
+    <select id="findWhun" resultType="com.aaa.repast.admin.project.system.shopInformation.domain.ShopInformation">
+		select  id ,name
+		from ums_shop_information
+		where status = 1
+    </select>
+    
+    <!--二级菜单、商品编号及名称。商品表的信息-->
+    <select id="findRegion" resultType="com.aaa.repast.admin.project.system.product.domain.Product">
+        select id,name
+		from pms_product pp
+		where shop_id=#{id}
+    </select>
+
+    <!--前台按钮修改推荐状态-->
+    <update id="recommendStatus" parameterType="HomeRecommendProduct">
+        update sms_home_recommend_product set recommend_status=#{recommend_status} where id=#{id}
+    </update>
+
+
+
+    <!--一级菜单修改商品、查询店铺的id-->
+    <select id="updateGoods" resultType="com.aaa.repast.admin.project.system.homeRecommendProduct.vo.HomeRecommendProductVo" >
+       select  DISTINCT pp.id,shrp.shop_id,pp.name
+		from sms_home_recommend_product shrp
+		left join pms_product pp on shrp.shop_id=pp.shop_id
+		where shrp.shop_id=#{shopId}
+    </select>
+
+
+    <!--二级菜单、修改模态框里获取商品的id-->
+    <select id="selectProductId" resultType="com.aaa.repast.admin.project.system.homeRecommendProduct.vo.HomeRecommendProductVo" >
+        select  DISTINCT pp.id,shrp.shop_id,pp.name
+		from sms_home_recommend_product shrp
+		left join pms_product pp on shrp.shop_id=pp.shop_id
+		where pp.id=#{productId}
+    </select>
+
+
+
+</mapper>
